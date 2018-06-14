@@ -1,0 +1,12 @@
+*.txt
+*.md
+*.pyc
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+geckodriver.log
+.idea/test.iml
+.idea/vcs.xml
+venv/.DS_Store
+.DS_Store
+.idea/inspectionProfiles/Project_Default.xml
