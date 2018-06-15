@@ -12,6 +12,10 @@ class Application:
         driver = self.driver
         driver.get("https://beta.pokermatch.com/ru")
 
+    def opensa(self):
+        driver = self.driver
+        driver.get("https://beta.pokermatch.com/sa")
+
     def login(self, group):
         driver = self.driver
         self.openMainPage()
@@ -24,7 +28,7 @@ class Application:
         driver = self.driver
         driver.find_element_by_xpath("//a[@href='/logout/']").click()
 
-    def ssignUp(self):
+    def signUp(self):
         driver = self.driver
         self.openMainPage()
         random = randrange(100000)
@@ -34,6 +38,8 @@ class Application:
         driver.find_element_by_xpath("(//input[@name='password'])[4]").send_keys("TestTest12")
         driver.find_element_by_xpath("(//input[@name='captcha'])[2]").send_keys("1111")
         driver.find_element_by_xpath("//div[@id='registration']/div/div/div[2]/form/button/div").click()
+
+
 
     def destroy(self):
         self.driver.quit()
