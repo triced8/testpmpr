@@ -3,9 +3,6 @@ class SessionHelper:
     def __init__(self, app):
         self.app = app
 
-    def opensa(self):
-        driver = self.app.driver
-        driver.get("https://beta.pokermatch.com/sa")
 
     def login(self, group):
         driver = self.app.driver

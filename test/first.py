@@ -4,6 +4,8 @@ from model.credLogin import Group
 from fixture.application import Application
 
 
+
+
 @pytest.fixture()
 def app(request):
     fixture =Application()
@@ -16,11 +18,11 @@ def test_login(app):
    app.session.logOut()
 
 def test_signUp(app):
-    app.signUp()
+    app.registration.signUp()
 
 
 def test_openadmin(app):
     app.session.login(Group(username="tricedu", password="TestTest12"))
     time.sleep(0.1)
-    app.session.opensa()
+    app.admin.open()
 
