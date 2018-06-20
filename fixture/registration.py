@@ -8,7 +8,8 @@ class SignUpHelper:
     def signUp(self, group):
         driver = self.app.driver
         self.app.openMainPage()
-        driver.find_element_by_xpath("//div[2]/a/span").click()
+
+        driver.find_element_by_xpath("//div[@class='head__inner']/div[2]/a[1]").click()
         driver.find_element_by_name("email").send_keys(group.email)
         driver.find_element_by_name("nick").send_keys(group.username)
         driver.find_element_by_xpath("(//input[@name='password'])[4]").send_keys(group.password)
