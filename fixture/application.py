@@ -21,12 +21,13 @@ class Application:
         driver = self.driver
         driver.get("https://beta.pokermatch.com/ru")
 
+    #Chack that fixture is valide
     def isValide(self):
         try:
             self.driver.current_url()
             return True
         except:
             return False
-
+    #Destroy fixture
     def destroy(self):
         self.driver.quit()
