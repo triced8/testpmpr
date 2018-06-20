@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 
 
 class SessionHelper:
@@ -33,6 +34,19 @@ class SessionHelper:
             else:
                 self.logout()
         self.login(username, password)
+
+    def userLogged(self):
+        xpath = "//a[@href='/logout/']"
+        return self.check_exists_by_xpath(xpath)
+
+
+    def check_exists_by_xpath(self, xpath):
+        driver = self.app.driver
+        try:
+            driver.find_element_by_xpath(xpath)
+        except NoSuchElementException:
+            return False
+        return True
 """
     def ensureLogout(self):
         driver = self.app.driver

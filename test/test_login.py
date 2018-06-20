@@ -33,6 +33,6 @@ def test_openadmin(app):
     app.session.login(LoginCred(username="tricedu", password="TestTest12"))
     time.sleep(0.1)
     app.admin.open()
-    app.openMainPage()
-    app.session.logout()
+    #app.openMainPage()
+    #app.session.logout()
 
