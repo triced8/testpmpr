@@ -9,7 +9,7 @@ class SessionHelper:
     def login(self, group):
         driver = self.app.driver
         # Open main page
-        self.app.openMainPage()
+        self.app.openMainPageRu()
         # Open LogIn pop-up
         driver.find_element_by_xpath("//a[2]/span").click()
         # Fill in fields
@@ -24,7 +24,7 @@ class SessionHelper:
         driver.find_element_by_xpath("//a[@href='/logout/']").click()
 
     # Compare user nickname with logged nickname
-    def isLoggedAs(self, username):
+    def isLoggedAs(self,  username):
         driver = self.app.driver
         return driver.find_element_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/account']").text == username
 
@@ -43,7 +43,7 @@ class SessionHelper:
                 self.logout()
         self.login(username, password)
 
-    # Take xpath of logout button
+    # Take xpath of the logout button
     def userLogged(self):
         xpath = "//a[@href='/logout/']"
         return self.checkExistsByXpath(xpath)

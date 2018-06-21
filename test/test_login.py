@@ -2,7 +2,6 @@ import time
 from model.credLogin import LoginCred
 from random import randrange
 
-
 random = randrange(100000)
 
 
@@ -12,9 +11,11 @@ def test_login(app):
     app.session.logout()
 
 
-
 def test_emptyFields(app):
     app.session.login(LoginCred(username="", password=""))
+    #time.sleep(1)
+    assert app.warning.warrningMessageFromLoginPopUp() == "Почта или пароль указаны неверно"
+    assert app.warning.warrningBoarderPasswordField() == "rgba(187, 37, 37, 1)"
 
 
 def test_emptyUserName(app):
@@ -33,6 +34,3 @@ def test_openadmin(app):
     app.session.login(LoginCred(username="tricedu", password="TestTest12"))
     time.sleep(0.1)
     app.admin.open()
-    #app.openMainPage()
-    #app.session.logout()
-

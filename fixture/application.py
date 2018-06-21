@@ -4,21 +4,24 @@ import conftest
 from fixture.session import SessionHelper
 from fixture.registration import SignUpHelper
 from fixture.admin import AdminHelper
-
+from fixture.warningMessages import WarningMessages
 
 class Application:
 
     def __init__(self):
         self.app = conftest.app
         self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.registration = SignUpHelper(self)
         self.admin = AdminHelper(self)
+        self.warning = WarningMessages(self)
 
 
-    def openMainPage(self):
+    def openMainPageRu(self):
         driver = self.driver
+        #if (driver.current_url.endswith("https://beta.pokermatch.com/ru") and driver.find_element_by_xpath("//div[@id='languages']").text == "РУС"):
+        #    return
         driver.get("https://beta.pokermatch.com/ru")
 
     #Chack that fixture is valide

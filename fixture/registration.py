@@ -8,7 +8,7 @@ class SignUpHelper:
     def signUp(self, group):
         driver = self.app.driver
         #Open main page
-        self.app.openMainPage()
+        self.app.openMainPageRu()
         #Open Sign Up pop-up
         driver.find_element_by_xpath("//div[@class='head__inner']/div[2]/a[1]").click()
         #Fill in fields
