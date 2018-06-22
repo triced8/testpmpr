@@ -13,21 +13,29 @@ def test_login(app):
 
 def test_emptyFields(app):
     app.session.login(LoginCred(username="", password=""))
-    #time.sleep(1)
     assert app.warning.warrningMessageFromLoginPopUp() == "Почта или пароль указаны неверно"
     assert app.warning.warrningBoarderPasswordField() == "rgba(187, 37, 37, 1)"
-
+    assert app.warning.warrningBoarderLoginField() == "rgba(187, 37, 37, 1)"
 
 def test_emptyUserName(app):
     app.session.login(LoginCred(username="", password="TestTest12"))
+    assert app.warning.warrningMessageFromLoginPopUp() == "Почта или пароль указаны неверно"
+    assert app.warning.warrningBoarderPasswordField() == "rgba(187, 37, 37, 1)"
+    assert app.warning.warrningBoarderLoginField() == "rgba(187, 37, 37, 1)"
 
 
 def test_emptyPassword(app):
     app.session.login(LoginCred(username="triced", password=""))
+    assert app.warning.warrningMessageFromLoginPopUp() == "Почта или пароль указаны неверно"
+    assert app.warning.warrningBoarderPasswordField() == "rgba(187, 37, 37, 1)"
+    assert app.warning.warrningBoarderLoginField() == "rgba(187, 37, 37, 1)"
 
 
-def test_emptyNotExistUser(app):
+def test_loginNotExistUser(app):
     app.session.login(LoginCred(username="triced" + str(random), password="TestTest12"))
+    assert app.warning.warrningMessageFromLoginPopUp() == "Почта или пароль указаны неверно"
+    assert app.warning.warrningBoarderPasswordField() == "rgba(187, 37, 37, 1)"
+    assert app.warning.warrningBoarderLoginField() == "rgba(187, 37, 37, 1)"
 
 
 def test_openadmin(app):

@@ -1,10 +1,10 @@
 from selenium import webdriver
-
 import conftest
 from fixture.session import SessionHelper
 from fixture.registration import SignUpHelper
 from fixture.admin import AdminHelper
 from fixture.warningMessages import WarningMessages
+
 
 class Application:
 
@@ -18,19 +18,22 @@ class Application:
         self.warning = WarningMessages(self)
 
 
+
     def openMainPageRu(self):
         driver = self.driver
         #if (driver.current_url.endswith("https://beta.pokermatch.com/ru") and driver.find_element_by_xpath("//div[@id='languages']").text == "РУС"):
         #    return
         driver.get("https://beta.pokermatch.com/ru")
 
-    #Chack that fixture is valide
+    # Check that fixture is valid
     def isValide(self):
         try:
             self.driver.current_url()
             return True
         except:
             return False
-    #Destroy fixture
+
+    # Destroy fixture
     def destroy(self):
         self.driver.quit()
+
