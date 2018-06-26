@@ -16,7 +16,6 @@ def app(request):
             fixture = Application()
             fixture.driver.fullscreen_window()
     request.addfinalizer(fixture.destroy)
-
     return fixture
 
 
