@@ -95,10 +95,14 @@ class SessionHelper:
             self.app.openMainPage()
             self.logout()
     """
-    #
+    # Enter Captcha if is enable
     def captchaEntering(self):
+        self.elementIsDisplayed(
+            "/html//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']")
+
+    def elementIsDisplayed(self, xpath):
         driver = self.app.driver
-        element = driver.find_element_by_xpath("/html//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']")
+        element = driver.find_element_by_xpath(xpath)
         time.sleep(0.05)
         if element.is_displayed():
             element.send_keys("1111")

@@ -44,6 +44,7 @@ def test_loginNickCaps(app):
 def test_closeOutside(app):
     app.session.openLoginPopup()
     app.session.clickOutSide()
+    assert not app.session.elementIsDisplayed("//div[@id='login']/div/div/div[2]/form/div[4]/button/div")
 
 
 def test_seePasword(app):

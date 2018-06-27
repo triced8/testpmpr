@@ -10,13 +10,15 @@ class WarningMessages:
     def __init__(self, app):
         self.app = app
 
-    def warrningMessageFromLoginPopUp(self):
-        waitElement = self.waitForElementXpath("(//input[@name='password'])[2]/following::div[1]")
+    # Take the warning message by Xpath
+    def warningMessage(self, xpath):
+        waitElement = self.waitForElementXpath(xpath)
         message = waitElement.get_attribute("outerText")
         return message
 
-    def warrningBoarderPasswordField(self):
-        waitElement = self.waitForElementXpath("//div[@id='login']//input[@name='password'][2]")
+    # Take boarder of element by Xpath
+    def warrningBoarder(self, xpath):
+        waitElement = self.waitForElementXpath(xpath)
         border = waitElement.value_of_css_property("border-bottom-color")
         return border
 
@@ -25,16 +27,13 @@ class WarningMessages:
         password = waitElement.get_attribute("value")
         return password
 
-    def warrningBoarderLoginField(self):
-        driver = self.app.driver
-        border = driver.find_element_by_name("login").value_of_css_property("border-bottom-color")
-        return border
-
+    # Waiting element by Xpath
     def waitForElementXpath(self, xpathElement):
         waitElement = WebDriverWait(self.app.driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, xpathElement)))
         return waitElement
 
+    # Waiting element by Name
     def waitForElementName(self, nameElement):
         waitElement = WebDriverWait(self.app.driver, 5).until(
             EC.visibility_of_element_located((By.NAME, nameElement)))

@@ -7,9 +7,9 @@ random = randrange(100000)
 def test_emptyFields(app):
     app.session.login(LoginCred(username="", password=""))
     app.session.captchaEntering()
-    assert app.warning.warrningMessageFromLoginPopUp() == "Почта или пароль указаны неверно"
-    assert app.warning.warrningBoarderPasswordField() == "rgba(187, 37, 37, 1)"
-    assert app.warning.warrningBoarderLoginField() == "rgba(187, 37, 37, 1)"
+    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.warrningBoarder("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
+    assert app.warning.warrningBoarder("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
 
 def test_emptyUserName(app):

@@ -18,3 +18,4 @@ class SignUpHelper:
         driver.find_element_by_xpath("(//input[@name='captcha'])[2]").send_keys(group.captcha)
         #Click on the Registration button
         driver.find_element_by_xpath("//div[@id='registration']/div/div/div[2]/form/button/div").click()
+
