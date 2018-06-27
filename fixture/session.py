@@ -1,7 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 import time
 from fixture.warningMessages import WarningMessages
-
+from selenium.webdriver import ActionChains
 
 
 class SessionHelper:
@@ -10,12 +10,17 @@ class SessionHelper:
         self.app = app
         self.warning = WarningMessages
 
-    def login(self, group):
+
+    def openLoginPopup(self):
         driver = self.app.driver
         # Open main page
         self.app.openMainPageRu()
         # Open LogIn pop-up
         driver.find_element_by_xpath("//a[2]/span").click()
+        return driver
+
+    def login(self, group):
+        driver = self.openLoginPopup()
         self.currentUrl(endswith="#login")
         # Fill in fields
         driver.find_element_by_name("login").clear()
@@ -26,6 +31,7 @@ class SessionHelper:
         driver.find_element_by_xpath("//div[@id='login']/div/div/div[2]/form/div[4]/button/div").click()
         #driver.delete_all_cookies()
 
+
     def logout(self):
         driver = self.app.driver
         # Click on the logout button
@@ -33,11 +39,7 @@ class SessionHelper:
 
     # Fill fields at the login pop-up
     def fillFieldsSeePasword(self, group):
-        driver = self.app.driver
-        # Open main page
-        self.app.openMainPageRu()
-        # Open LogIn pop-up
-        driver.find_element_by_xpath("//a[2]/span").click()
+        driver = self.openLoginPopup()
         self.currentUrl(endswith="#login")
         # Fill in fields
         driver.find_element_by_name("login").clear()
@@ -93,7 +95,7 @@ class SessionHelper:
             self.app.openMainPage()
             self.logout()
     """
-
+    #
     def captchaEntering(self):
         driver = self.app.driver
         element = driver.find_element_by_xpath("/html//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']")
@@ -103,3 +105,10 @@ class SessionHelper:
             driver.find_element_by_xpath("//div[@id='login']/div/div/div[2]/form/div[4]/button/div").click()
         else:
             pass
+
+    # Click outside the login pop-up
+    def clickOutSide(self):
+        driver = self.app.driver
+        action = ActionChains(driver)
+        action.move_by_offset(5, 5).click()
+        action.perform()
