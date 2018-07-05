@@ -1,5 +1,6 @@
 from selenium import webdriver
 import conftest
+from fixture.pages import Pages
 from fixture.session import SessionHelper
 from fixture.registration import SignUpHelper
 from fixture.admin import AdminHelper
@@ -16,7 +17,7 @@ class Application:
         self.registration = SignUpHelper(self)
         self.admin = AdminHelper(self)
         self.warning = WarningMessages(self)
-
+        self.pages = Pages(self)
 
 
     def openMainPageRu(self):

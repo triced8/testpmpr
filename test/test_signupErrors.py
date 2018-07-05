@@ -18,19 +18,19 @@ def test_signUpEmpty(app):
         "//div[@id='registration']//div[@class='modala__agreement_wrapper']//span[@class='checkbox__box']").click()
     time.sleep(0.5)
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][1]") == "Поле обязательно для заполнения"
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//form[@action='/profile/create/']/div[2]/span[3]") == "Поле обязательно для заполнения"
     # Error message for password field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'password'][1]") == "Поле обязательно для заполнения"
     # Error message for PP captcha
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//div[6]//span[@class='modala__error']") == "Поле обязательно для заполнения"
     # Error message for captcha field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@class='modala-captcha__wrapper']/span[1]") == "Поле обязательно для заполнения"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -60,7 +60,7 @@ def test_signUpEmptyEmail(app):
         test_signUpEmptyEmail(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][1]") == "Поле обязательно для заполнения"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -80,7 +80,7 @@ def test_signUpEmptyNick(app):
         test_signUpEmptyNick(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][1]") == "Поле обязательно для заполнения"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -99,7 +99,7 @@ def test_signUpEmptyPassword(app):
         test_signUpEmptyPassword(app)
     """
     # Error message for password field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'password'][1]") == "Поле обязательно для заполнения"
     # Border for password field
     assert app.warning.getBorderColor(
@@ -121,7 +121,7 @@ def test_signUpEmptyPPCheckBox(app):
         test_signUpEmptyPPCheckBox(app)
     """
     # Error message for PP captcha
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//div[6]//span[@class='modala__error']") == "Поле обязательно для заполнения"
     # Border for PP check box field
     assert app.warning.getBorderColor("//*[@id='registration']//div[6]/div") == "rgba(187, 37, 37, 1)"
@@ -141,7 +141,7 @@ def test_signUpCaptcha(app):
         test_signUpCaptcha(app)
     """
     # Error message for captcha field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//div[@class='modala-captcha__wrapper']/span[1]") == "Поле обязательно для заполнения"
     # Border for captcha field
     assert app.warning.getBorderColor("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"
@@ -160,7 +160,7 @@ def test_signupWithExistEmail(app):
         test_signupWithExistEmail(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][3]") == "Этот email уже зарегистрирован"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -179,7 +179,7 @@ def test_signupWithoutAT(app):
         test_signupWithoutAT(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -198,7 +198,7 @@ def test_signupWithoutDomain(app):
         test_signupWithoutDomain(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -217,7 +217,7 @@ def test_signupWithoutEmailName(app):
         test_signupWithoutEmailName(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -237,7 +237,7 @@ def test_signupWithoutDotCom(app):
         test_signupWithoutDotCom(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -256,7 +256,7 @@ def test_signupWithoutDot(app):
         test_signupWithoutDot(app)
     """
     # Error message for email field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
@@ -274,7 +274,7 @@ def test_signupExistNick(app):
         test_signupExistNick(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][4]") == "Этот логин уже занят"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -293,7 +293,7 @@ def test_signUpNickSpaceMiddle(app):
         test_signUpNickSpaceMiddle(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -312,7 +312,7 @@ def test_signUpNickWithSpecial(app):
         test_signUpNickWithSpecial(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -330,7 +330,7 @@ def test_signUpNickMin(app):
         test_signUpNickMin(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][2]") == "Логин слишком короткий"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -348,7 +348,7 @@ def test_signUpNickSpaceBefore(app):
         test_signUpNickSpaceBefore(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -365,7 +365,7 @@ def test_signUpNickSpaceAll(app):
         test_signUpNickSpaceBefore(app)
     """
     # Error message for NickName field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
     assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
@@ -379,7 +379,7 @@ def test_signUpPasswordEmpty(app):
     else:
         app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + str(random), password = "", captcha = "1111"))
     # Error message for password field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'password'][1]") == "Поле обязательно для заполнения"
     # Border for password field
     assert app.warning.getBorderColor(
@@ -396,7 +396,7 @@ def test_signUpPasswordWrongCaptcha(app):
             SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random), password="TestTest12",
                        captcha="1234"))
     # Error message for captcha field
-    assert app.warning.warningMessage(
+    assert app.warning.getOuterText(
         "//div[@class='modala-captcha__wrapper']/span[2]") == "Введено неверное значение"
     # Border for captcha field
     assert app.warning.getBorderColor("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"

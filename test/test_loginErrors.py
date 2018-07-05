@@ -7,7 +7,7 @@ random = randrange(100000)
 def test_emptyFields(app):
     app.session.login(LoginCred(username="", password=""))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -15,7 +15,7 @@ def test_emptyFields(app):
 def test_emptyUserName(app):
     app.session.login(LoginCred(username="", password="TestTest12"))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -24,7 +24,7 @@ def test_emptyUserName(app):
 def test_emptyPassword(app):
     app.session.login(LoginCred(username="triced", password=""))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -32,7 +32,7 @@ def test_emptyPassword(app):
 
 def test_loginNotExistUser(app):
     app.session.login(LoginCred(username="triced" + str(random), password="TestTest12"))
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -40,7 +40,7 @@ def test_loginNotExistUser(app):
 def test_nickNameWithDoteAfter(app):
     app.session.login(LoginCred(username="triced.", password="TestTest12"))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -48,7 +48,7 @@ def test_nickNameWithDoteAfter(app):
 def test_emailWithDoteAfter(app):
     app.session.login(LoginCred(username="triced8+3030@gmail.com.", password="TestTest12"))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -56,7 +56,7 @@ def test_emailWithDoteAfter(app):
 def test_nickNameWithDoteBefore(app):
     app.session.login(LoginCred(username=".triced", password="TestTest12"))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
@@ -64,7 +64,7 @@ def test_nickNameWithDoteBefore(app):
 def test_loginPasswordCaps(app):
     app.session.login(LoginCred(username="triced8+3030@gmail.com", password="TestTest12".upper()))
     app.session.captchaEntering()
-    assert app.warning.warningMessage("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    assert app.warning.getOuterText("(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
     assert app.warning.getBorderColor("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
     assert app.warning.getBorderColor("//input[@name='login']") == "rgba(187, 37, 37, 1)"
     app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()

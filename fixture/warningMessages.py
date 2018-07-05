@@ -11,7 +11,7 @@ class WarningMessages:
         self.app = app
 
     # Take the warning message by Xpath
-    def warningMessage(self, xpath):
+    def getOuterText(self, xpath):
         waitElement = self.waitForElementXpath(xpath)
         message = waitElement.get_attribute("outerText")
         return message

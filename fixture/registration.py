@@ -34,7 +34,7 @@ class SignUpHelper:
         driver.find_element_by_name("nick").send_keys(group.username)
         driver.find_element_by_xpath("(//input[@name='password'])[4]").send_keys(group.password)
         driver.find_element_by_xpath("(//input[@name='captcha'])[2]").send_keys(group.captcha)
-        assert self.app.warning.warningMessage("//span[@class='modala__ok']") == "Этот логин доступен"
+        assert self.app.warning.getOuterText("//span[@class='modala__ok']") == "Этот логин доступен"
         assert self.app.warning.getBorderColor("//div[@id='registration']//input[@id='login']") == "rgba(0, 128, 0, 1)"
         #Click on the Registration button
 
