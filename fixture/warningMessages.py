@@ -17,15 +17,16 @@ class WarningMessages:
         return message
 
     # Take boarder of element by Xpath
-    def warrningBoarder(self, xpath):
+    def getBorderColor(self, xpath):
         waitElement = self.waitForElementXpath(xpath)
         border = waitElement.value_of_css_property("border-bottom-color")
         return border
 
-    def passswordFieldGetValue(self):
-        waitElement = self.waitForElementXpath("(//input[@name='password'])[2]")
+    def passswordFieldGetValue(self, xpath):
+        waitElement = self.waitForElementXpath(xpath)
         password = waitElement.get_attribute("value")
         return password
+
 
     # Waiting element by Xpath
     def waitForElementXpath(self, xpathElement):

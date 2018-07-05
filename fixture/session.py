@@ -8,7 +8,7 @@ class SessionHelper:
 
     def __init__(self, app):
         self.app = app
-        self.warning = WarningMessages
+        self.warning = WarningMessages(self)
 
 
     def openLoginPopup(self):
@@ -28,7 +28,7 @@ class SessionHelper:
         driver.find_element_by_xpath("(//input[@name='password'])[2]").clear()
         driver.find_element_by_xpath("(//input[@name='password'])[2]").send_keys(group.password)
         # Click on the login button
-        driver.find_element_by_xpath("//div[@id='login']/div/div/div[2]/form/div[4]/button/div").click()
+        driver.find_element_by_xpath("//form[@action='/login/']//div[@class='modala-button__text']").click()
         #driver.delete_all_cookies()
 
 
@@ -98,15 +98,15 @@ class SessionHelper:
     # Enter Captcha if is enable
     def captchaEntering(self):
         self.elementIsDisplayed(
-            "/html//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']")
+            "//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']")
 
     def elementIsDisplayed(self, xpath):
         driver = self.app.driver
         element = driver.find_element_by_xpath(xpath)
-        time.sleep(0.05)
+        time.sleep(0.1)
         if element.is_displayed():
             element.send_keys("1111")
-            driver.find_element_by_xpath("//div[@id='login']/div/div/div[2]/form/div[4]/button/div").click()
+            driver.find_element_by_xpath("//form[@action='/login/']//div[@class='modala-button__text']").click()
         else:
             pass
 
@@ -116,3 +116,4 @@ class SessionHelper:
         action = ActionChains(driver)
         action.move_by_offset(5, 5).click()
         action.perform()
+
