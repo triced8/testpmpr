@@ -95,20 +95,20 @@ class SessionHelper:
             self.app.openMainPage()
             self.logout()
     """
+    def elementIsDisplay(self, xpath):
+        driver = self.app.driver
+        element = driver.find_element_by_xpath(xpath)
+        return element.is_displayed()
+
     # Enter Captcha if is enable
     def captchaEntering(self):
-        self.elementIsDisplayed(
-            "//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']")
-
-    def elementIsDisplayed(self, xpath):
+        xpath = "//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']"
         driver = self.app.driver
         element = driver.find_element_by_xpath(xpath)
         time.sleep(0.1)
-        if element.is_displayed():
+        if self.elementIsDisplay(xpath):
             element.send_keys("1111")
             driver.find_element_by_xpath("//form[@action='/login/']//div[@class='modala-button__text']").click()
-        else:
-            pass
 
     # Click outside the login pop-up
     def clickOutSide(self):
