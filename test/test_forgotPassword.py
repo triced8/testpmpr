@@ -54,7 +54,7 @@ def test_emailWithotAt(app):
     app.driver.find_element_by_xpath("//input[@id='captcha']").send_keys("1111")
     app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
     assert app.warning.getOuterText("//div[@class='password_reminder_fields']/span[2]") == "E-mail не существует или не подтвержден"
-    assert app.warning.getBorderColor("//input[@id='captcha']") == "rgba(187, 37, 37, 1)"
+    assert app.warning.getBorderColor("//input[@id='email']") == "rgba(187, 37, 37, 1)"
 
 def test_emailWithotDomain(app):
     app.pages.openForgotPasswordPage()
