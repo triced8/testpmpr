@@ -166,12 +166,12 @@ def test_signupWithExistEmail(app):
     assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signupWithoutAT(app):
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+def test_signupWithoutAT(app1):
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+3232gmail.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+3232gmail.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
         time.sleep(0.1)
     """
     if app.registration.errorSignUp():
@@ -179,18 +179,18 @@ def test_signupWithoutAT(app):
         test_signupWithoutAT(app)
     """
     # Error message for email field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
-    assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signupWithoutDomain(app):
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+def test_signupWithoutDomain(app1):
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+3232@.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+3232@.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
         time.sleep(0.1)
     """
     if app.registration.errorSignUp():
@@ -198,18 +198,18 @@ def test_signupWithoutDomain(app):
         test_signupWithoutDomain(app)
     """
     # Error message for email field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
-    assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signupWithoutEmailName(app):
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+def test_signupWithoutEmailName(app1):
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "@gmail.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "@gmail.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
         time.sleep(0.1)
     """
     if app.registration.errorSignUp():
@@ -217,18 +217,18 @@ def test_signupWithoutEmailName(app):
         test_signupWithoutEmailName(app)
     """
     # Error message for email field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
-    assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signupWithoutDotCom(app):
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+def test_signupWithoutDotCom(app1):
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "pmtest8+3232@gmail", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "pmtest8+3232@gmail", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
         time.sleep(0.1)
     """
     if app.registration.errorSignUp():
@@ -237,16 +237,16 @@ def test_signupWithoutDotCom(app):
         test_signupWithoutDotCom(app)
     """
     # Error message for email field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
-    assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signupWithoutDot(app):
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+def test_signupWithoutDot(app1):
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
         app.registration.signUp(SignupCred(email = "pmtest8+3232@gmailcom", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
         time.sleep(0.1)
@@ -256,147 +256,147 @@ def test_signupWithoutDot(app):
         test_signupWithoutDot(app)
     """
     # Error message for email field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][4]") == "Неверный ввод"
     # Border for email field
-    assert app.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signupExistNick(app):
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+def test_signupExistNick(app1):
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "tricedu", password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "tricedu", password = "TestTest12", captcha = "1111"))
     """
     if app.registration.errorSignUp():
         app.driver.get("https://beta.pokermatch.com/ru#registration")
         test_signupExistNick(app)
     """
     # Error message for NickName field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][4]") == "Этот логин уже занят"
     # Border for nickname field
-    assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signUpNickSpaceMiddle(app):
+def test_signUpNickSpaceMiddle(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + " " + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + " " + str(random), password = "TestTest12", captcha = "1111"))
     """
     if app.registration.errorSignUp():
         app.driver.get("https://beta.pokermatch.com/ru#registration")
         test_signUpNickSpaceMiddle(app)
     """
     # Error message for NickName field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
-    assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signUpNickWithSpecial(app):
+def test_signUpNickWithSpecial(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced+" +  str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced+" +  str(random), password = "TestTest12", captcha = "1111"))
     """
     if app.registration.errorSignUp():
         app.driver.get("https://beta.pokermatch.com/ru#registration")
         test_signUpNickWithSpecial(app)
     """
     # Error message for NickName field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
-    assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signUpNickMin(app):
+def test_signUpNickMin(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "T", password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "T", password = "TestTest12", captcha = "1111"))
     """
     if app.registration.errorSignUp():
         test_signUpNickMin(app)
     """
     # Error message for NickName field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][2]") == "Логин слишком короткий"
     # Border for nickname field
-    assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signUpNickSpaceBefore(app):
+def test_signUpNickSpaceBefore(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = " triced" + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = " triced" + str(random), password = "TestTest12", captcha = "1111"))
     """
     if app.registration.errorSignUp():
         test_signUpNickSpaceBefore(app)
     """
     # Error message for NickName field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
-    assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
 
-def test_signUpNickSpaceAll(app):
+def test_signUpNickSpaceAll(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "        " + str(random), password = "TestTest12", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "        " + str(random), password = "TestTest12", captcha = "1111"))
     """
     if app.registration.errorSignUp():
         test_signUpNickSpaceBefore(app)
     """
     # Error message for NickName field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
     # Border for nickname field
-    assert app.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
 
 
-def test_signUpPasswordEmpty(app):
+def test_signUpPasswordEmpty(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + str(random), password = "", captcha = "1111"))
+        app1.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + str(random), password = "", captcha = "1111"))
     # Error message for password field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'password'][1]") == "Поле обязательно для заполнения"
     # Border for password field
-    assert app.warning.getBorderColor(
+    assert app1.warning.getBorderColor(
         "//div[@id='registration']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
 
 
-def test_signUpPasswordWrongCaptcha(app):
+def test_signUpPasswordWrongCaptcha(app1):
     random = randrange(1000000000)
-    if app.session.userLogged():
-        app.openMainPageRu()
-        app.session.logout()
+    if app1.session.userLogged():
+        app1.openMainPageRu()
+        app1.session.logout()
     else:
-        app.registration.signUp(
+        app1.registration.signUp(
             SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random), password="TestTest12",
                        captcha="1234"))
     # Error message for captcha field
-    assert app.warning.getOuterText(
+    assert app1.warning.getOuterText(
         "//div[@class='modala-captcha__wrapper']/span[2]") == "Введено неверное значение"
     # Border for captcha field
-    assert app.warning.getBorderColor("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"
+    assert app1.warning.getBorderColor("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"

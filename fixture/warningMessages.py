@@ -1,9 +1,8 @@
-#from model.credLogin import LoginCred
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-#from fixture.session import SessionHelper
+
 
 class WarningMessages:
 
@@ -22,7 +21,7 @@ class WarningMessages:
         border = waitElement.value_of_css_property("border-bottom-color")
         return border
 
-    def passswordFieldGetValue(self, xpath):
+    def getValue(self, xpath):
         waitElement = self.waitForElementXpath(xpath)
         password = waitElement.get_attribute("value")
         return password

@@ -44,12 +44,12 @@ def test_loginNickCaps(app):
 def test_closeOutside(app):
     app.session.openLoginPopup()
     app.session.clickOutSide()
-    assert not app.session.elementIsDisplayed("//form[@action='/login/']//div[@class='modala-button__text']")
+    assert not app.session.elementIsDisplay("//form[@action='/login/']//div[@class='modala-button__text']")
 
 
 def test_seePasword(app):
     app.session.fillFieldsSeePasword(LoginCred(username="triced", password="TestTest12"))
-    assert app.warning.passswordFieldGetValue(xpath="(//input[@name='password'])[2]") == "TestTest12"
+    assert app.warning.getValue(xpath="(//input[@name='password'])[2]") == "TestTest12"
 
 #def test_openadmin(app):
 #    app.session.login(LoginCred(username="tricedu", password="TestTest12"))

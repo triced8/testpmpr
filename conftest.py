@@ -10,12 +10,22 @@ def app(request):
     global fixture
     if fixture is None:
         fixture = Application()
-        fixture.driver.fullscreen_window()
     else:
         if not fixture.isValide():
             fixture = Application()
-            fixture.driver.fullscreen_window()
     request.addfinalizer(fixture.destroy)
+    fixture.driver.fullscreen_window()
     return fixture
 
 
+@pytest.fixture(scope="session")
+def app1(request):
+    global fixture
+    if fixture is None:
+        fixture = Application()
+    else:
+        if not fixture.isValide():
+            fixture = Application()
+    request.addfinalizer(fixture.destroy)
+    fixture.driver.fullscreen_window()
+    return fixture

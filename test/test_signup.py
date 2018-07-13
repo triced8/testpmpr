@@ -106,7 +106,7 @@ def test_signUpPasswordSeePassword(app):
     else:
         app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
     app.driver.find_element_by_xpath("//div[@id='registration']//span[@class='switch_pass']").click()
-    assert app.warning.passswordFieldGetValue(xpath="(//input[@name='password'])[4]") == "TestTest12"
+    assert app.warning.getValue(xpath="(//input[@name='password'])[4]") == "TestTest12"
 
 
 def test_closeOutside(app):
