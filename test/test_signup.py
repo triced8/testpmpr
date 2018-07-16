@@ -99,12 +99,12 @@ def test_signUpPasswordSpecial(app):
         app.registration.signUpHeppyPass(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + str(random), password = '!@#$%^/\&*()~?|}"\'{:[]<>,.', captcha = "1111"))
 
 def test_signUpPasswordSeePassword(app):
-    random = randrange(1000000000)
     if app.session.userLogged():
         app.openMainPageRu()
         app.session.logout()
     else:
-        app.registration.signUp(SignupCred(email = "testpm8+" + str(random) + "@gmail.com", username = "triced" + str(random), password = "TestTest12", captcha = "1111"))
+        app.registration.openSignupPopup()
+    app.driver.find_element_by_xpath("(//input[@name='password'])[4]").send_keys("TestTest12")
     app.driver.find_element_by_xpath("//div[@id='registration']//span[@class='switch_pass']").click()
     assert app.warning.getValue(xpath="(//input[@name='password'])[4]") == "TestTest12"
 
