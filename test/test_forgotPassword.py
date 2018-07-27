@@ -10,7 +10,7 @@ def test_validEmail(app):
     app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
     time.sleep(0.1)
     app.session.currentUrl("/confirmation/")
-    assert app.warning.getOuterText("//h2[@class='main_title']") == "Пожалуйста, проверьте Ваш e-mail ящик"
+    assert app.warning.getOuterText("//h2[@class='main_title']") == v
 
 def test_emptyEmail(app):
     app.pages.openForgotPasswordPage()

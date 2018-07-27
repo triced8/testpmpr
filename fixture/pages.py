@@ -1,5 +1,6 @@
 from model.credLogin import LoginCred
 import time
+from selenium.webdriver.firefox.options import Options
 
 
 class Pages:
@@ -10,6 +11,7 @@ class Pages:
     def openMainPage(self):
         driver = self.app.driver
         driver.get("https://beta.pokermatch.com/ru")
+
 
     def openForgotPasswordPage(self):
         driver = self.app.driver
@@ -28,3 +30,16 @@ class Pages:
     def frameSwitch(self, xpath):
         driver = self.app.driver
         driver.switch_to.frame(driver.find_element_by_xpath(xpath))
+
+
+    def downloadPopup(self):
+        options = Options()
+        driver = self.app.driver
+        self.openMainPage()
+        driver.find_element_by_xpath("//a[@href='/download/win']/span[@class='button__inner']").click()
+        options.set_preference("browser.safebrowsing.downloads.enabled", True)
+        options.set_preference("browser.download.folderList", 1)
+        options.set_preference("browser.download.manager.showWhenStarting", False)
+        options.set_preference("browser.download.dir", "/data")
+        options.set_preference("browser.helperApps.neverAsk.saveToDisk", "/Users/d.demchenko/Desktop/blabla.dmg")
+        time.sleep(20)

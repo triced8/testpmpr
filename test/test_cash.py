@@ -5,11 +5,10 @@ from model.credLogin import LoginCred
 random = randrange(100000000)
 
 
-
-def test_openCasgPage(app):
+def test_openCashPage(app):
     app.pages.openCahsPage()
     app.pages.frameSwitch("//*[@id='cash']/iframe")
-    assert app.warning.getOuterText("//ul[@class='filter top_menu']/li[1]") == "Пополнить счет"
+    assert app.warning.getOuterText("//ul[@class='filter top_menu']/li[1]") == app.text.headerCash
     app.pages.openMainPage()
     app.session.logout()
 
@@ -50,3 +49,5 @@ def test_openGameClient(app):
     time.sleep(2)
     app.driver.switch_to_window(app.driver.window_handles[1])
     assert app.driver.title.startswith('PokerMatch Лобби | Ник: triced |')
+    app.driver.switch_to_window(app.driver.window_handles[0])
+    app.session.logout()

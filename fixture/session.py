@@ -74,6 +74,7 @@ class SessionHelper:
 
 
     # Check that element is Exists on the page
+    """
     def checkExistsByXpath(self, xpath):
         driver = self.app.driver
         try:
@@ -81,6 +82,7 @@ class SessionHelper:
         except NoSuchElementException:
             return False and print ("No!!!")
         return True and print ("Yes!!!")
+    """
 
     def currentUrl(self, endswith):
         driver = self.app.driver

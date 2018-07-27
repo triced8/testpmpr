@@ -22,7 +22,7 @@ def monkeypatch():
         monkeypatch.setitem(mapping, name, value)
         monkeypatch.delitem(obj, name, raising=True)
         monkeypatch.setenv(name, value, prepend=False)
-        monkeypatch.delenv(name, value, raising=True)
+        monkeypatch.delenv(name, raising=True)
         monkeypatch.syspath_prepend(path)
         monkeypatch.chdir(path)
 
@@ -86,7 +86,6 @@ def derive_importpath(import_path, raising):
 
 
 class Notset(object):
-
     def __repr__(self):
         return "<notset>"
 
