@@ -16,3 +16,5 @@ fixture/.pytest_cache/v/cache/lastfailed
 fixture/.pytest_cache/v/cache/nodeids
 test/.pytest_cache/v/cache/lastfailed
 test/.pytest_cache/v/cache/nodeids
+allure-report/*
+
