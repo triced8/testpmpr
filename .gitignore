@@ -1,6 +1,9 @@
 *.txt
 *.md
 *.pyc
+*.json
+*.csv
+*.rst
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
@@ -19,6 +22,7 @@ test/.pytest_cache/v/cache/nodeids
 allure-report/*
 venv2/*
 venv/*
+test/reports/*
 venv/lib/python3.6/site-packages/allure/__init__.py
 venv/lib/python3.6/site-packages/allure/adaptor.py
 venv/lib/python3.6/site-packages/allure/common.py
