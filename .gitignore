@@ -20,9 +20,9 @@ fixture/.pytest_cache/v/cache/nodeids
 test/.pytest_cache/v/cache/lastfailed
 test/.pytest_cache/v/cache/nodeids
 allure-report/*
-venv2/*
-venv/pip/*
-test/reports/*
+*/venv2
+*/venv
+*/test/reports
 venv/lib/python3.6/site-packages/allure/__init__.py
 venv/lib/python3.6/site-packages/allure/adaptor.py
 venv/lib/python3.6/site-packages/allure/common.py
