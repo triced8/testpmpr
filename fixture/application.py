@@ -34,7 +34,7 @@ class Application:
 
     def openMainPageRu(self):
         driver = self.driver
-        #if (driver.current_url.endswith("https://beta.pokermatch.com/ru") and driver.find_element_by_xpath("//div[@id='languages']").text == "РУС"):
+
         #    return
         driver.get("https://beta.pokermatch.com/ru")
 

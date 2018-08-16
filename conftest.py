@@ -1,6 +1,4 @@
 import pytest
-import logging
-
 from fixture.application import Application
 fixture = None
 

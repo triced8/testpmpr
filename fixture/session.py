@@ -16,7 +16,7 @@ class SessionHelper:
         # Open main page
         self.app.openMainPageRu()
         # Open LogIn pop-up
-        driver.find_element_by_xpath("//a[2]/span").click()
+        driver.find_element_by_xpath("//a[@href='#login']/span[@class='button__inner']").click()
         return driver
 
     def login(self, group):
@@ -74,15 +74,15 @@ class SessionHelper:
 
 
     # Check that element is Exists on the page
-    """
+
     def checkExistsByXpath(self, xpath):
         driver = self.app.driver
         try:
             driver.find_element_by_xpath(xpath)
         except NoSuchElementException:
-            return False and print ("No!!!")
-        return True and print ("Yes!!!")
-    """
+            return False
+        return True
+
 
     def currentUrl(self, endswith):
         driver = self.app.driver
