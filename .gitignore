@@ -21,7 +21,7 @@ test/.pytest_cache/v/cache/lastfailed
 test/.pytest_cache/v/cache/nodeids
 allure-report/*
 venv2/*
-venv/*
+venv/pip/*
 test/reports/*
 venv/lib/python3.6/site-packages/allure/__init__.py
 venv/lib/python3.6/site-packages/allure/adaptor.py
