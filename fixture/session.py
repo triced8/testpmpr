@@ -51,7 +51,7 @@ class SessionHelper:
     # Compare user nickname with logged nickname
     def isLoggedAs(self,  username):
         driver = self.app.driver
-        return driver.find_element_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/account']").text == username
+        return driver.find_element_by_xpath("//div[@class='info-list__item info-list__item_type_nick']//a").text == username
 
     # Check that page have logout button
     def isLoggedIn(self):
