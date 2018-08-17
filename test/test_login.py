@@ -10,8 +10,8 @@ def test_loginNick(app):
         app.pages.openMainPage()
     with pytest.allure.step("Login with nickname"):
         app.session.login(LoginCred(username="triced", password="TestTest12"))
-    with pytest.allure.step("Assert to number of cash button"):
-        assert len(app.driver.find_elements_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/cash']")) > 0
+    with pytest.allure.step("Assert to number of logout button"):
+        assert len(app.driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
     with pytest.allure.step("Ensure Login"):
         app.session.ensureLogin(username="triced")
     with pytest.allure.step("Logout"):
@@ -23,8 +23,8 @@ def test_loginNickSpaceAfter(app):
         app.pages.openMainPage()
     with pytest.allure.step("Login with space after nickname"):
         app.session.login(LoginCred(username="triced ", password="TestTest12"))
-    with pytest.allure.step("Assert to number of cash button"):
-        assert len(app.driver.find_elements_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/cash']")) > 0
+    with pytest.allure.step("Assert to number of logout button"):
+        assert len(app.driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
     with pytest.allure.step("Ensure Login"):
         app.session.ensureLogin(username="triced")
     with pytest.allure.step("Logout"):
@@ -36,8 +36,8 @@ def test_loginNickSpaceBefore(app):
         app.pages.openMainPage()
     with pytest.allure.step("Login with space before nickname"):
         app.session.login(LoginCred(username=" triced", password="TestTest12"))
-    with pytest.allure.step("Assert to number of cash button"):
-        assert len(app.driver.find_elements_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/cash']")) > 0
+    with pytest.allure.step("Assert to number of logout button"):
+        assert len(app.driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
     with pytest.allure.step("Ensure Login"):
         app.session.ensureLogin(username="triced")
     with pytest.allure.step("Logout"):
@@ -49,8 +49,8 @@ def test_loginEmail(app):
         app.pages.openMainPage()
     with pytest.allure.step("Login with email"):
         app.session.login(LoginCred(username="triced8+3030@gmail.com", password="TestTest12"))
-    with pytest.allure.step("Assert to number of cash button"):
-        assert len(app.driver.find_elements_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/cash']")) > 0
+    with pytest.allure.step("Assert to number of logout button"):
+        assert len(app.driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
     with pytest.allure.step("Ensure Login"):
         app.session.ensureLogin(username="tricedu")
     with pytest.allure.step("Logout"):
@@ -62,8 +62,8 @@ def test_loginEmailCaps(app):
         app.pages.openMainPage()
     with pytest.allure.step("Login with email Caps"):
         app.session.login(LoginCred(username="triced8+3030@gmail.com".upper(), password="TestTest12"))
-    with pytest.allure.step("Assert to number of cash button"):
-        assert len(app.driver.find_elements_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/cash']")) > 0
+    with pytest.allure.step("Assert to number of logout button"):
+        assert len(app.driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
     with pytest.allure.step("Ensure Login"):
         app.session.ensureLogin(username="tricedu")
     with pytest.allure.step("Logout"):
@@ -75,8 +75,8 @@ def test_loginNickCaps(app):
         app.pages.openMainPage()
     with pytest.allure.step("Login with nickname Caps"):
         app.session.login(LoginCred(username="tricedu".upper(), password="TestTest12"))
-    with pytest.allure.step("Assert to number of cash button"):
-        assert len(app.driver.find_elements_by_xpath("//a[@href='https://beta.pokermatch.com/ru/page/cash']")) > 0
+    with pytest.allure.step("Assert to number of logout button"):
+        assert len(app.driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
     with pytest.allure.step("Ensure Login"):
         app.session.ensureLogin(username="tricedu")
     with pytest.allure.step("Logout"):
