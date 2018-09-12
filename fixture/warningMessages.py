@@ -10,31 +10,30 @@ class WarningMessages:
         self.app = app
 
     # Take the warning message by Xpath
-    def getOuterText(self, xpath):
-        waitElement = self.waitForElementXpath(xpath)
+    def get_outer_text(self, xpath):
+        waitElement = self.wait_for_element_xpath(xpath)
         message = waitElement.get_attribute("outerText")
         return message
 
     # Take boarder of element by Xpath
-    def getBorderColor(self, xpath):
-        waitElement = self.waitForElementXpath(xpath)
+    def get_border_color(self, xpath):
+        waitElement = self.wait_for_element_xpath(xpath)
         border = waitElement.value_of_css_property("border-bottom-color")
         return border
 
-    def getValue(self, xpath):
-        waitElement = self.waitForElementXpath(xpath)
+    def get_value(self, xpath):
+        waitElement = self.wait_for_element_xpath(xpath)
         password = waitElement.get_attribute("value")
         return password
 
-
     # Waiting element by Xpath
-    def waitForElementXpath(self, xpathElement):
+    def wait_for_element_xpath(self, xpathElement):
         waitElement = WebDriverWait(self.app.driver, 5).until(
             EC.visibility_of_element_located((By.XPATH, xpathElement)))
         return waitElement
 
     # Waiting element by Name
-    def waitForElementName(self, nameElement):
+    def wait_for_element_name(self, nameElement):
         waitElement = WebDriverWait(self.app.driver, 5).until(
             EC.visibility_of_element_located((By.NAME, nameElement)))
         return waitElement

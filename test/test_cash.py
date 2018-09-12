@@ -5,66 +5,69 @@ import pytest
 
 random = randrange(100000000)
 
+
 @pytest.allure.step("Open cash page")
-def test_openCashPage(app):
+def test_open_cash_page(app):
     with pytest.allure.step("Open Cash page"):
-        app.pages.openCahsPage()
+        app.pages.open_cash_page()
     with pytest.allure.step("Switch in to the cash frame"):
-        app.pages.frameSwitch("//*[@id='cash']/iframe")
+        app.pages.frame_switch("//*[@id='cash']/iframe")
     with pytest.allure.step("Assert that page is opened"):
-        assert app.warning.getOuterText("//ul[@class='filter top_menu']/li[1]") == app.text.headerCash
+        assert app.warning.get_outer_text("//ul[@class='filter top_menu']/li[1]") == app.text.headerCash
     with pytest.allure.step("Logout from user account"):
-        app.pages.openMainPage()
+        app.pages.open_main_page()
         app.session.logout()
+
 
 @pytest.allure.step("Open cash form")
-def test_openCardForm(app):
+def test_open_card_form(app):
     with pytest.allure.step("Open Cash page"):
-        app.pages.openCahsPage()
+        app.pages.open_cash_page()
     with pytest.allure.step("Switch in to the cash frame"):
-        app.pages.frameSwitch("//*[@id='cash']/iframe")
+        app.pages.frame_switch("//*[@id='cash']/iframe")
     with pytest.allure.step("Open cash form"):
         app.driver.find_element_by_xpath("//div[@class ='widget deposit_widget']").click()
-    #time.sleep(3)
+    # time.sleep(3)
     with pytest.allure.step("If user have saved cards, open form"):
-        if app.session.elementIsDisplay("//label[@for='stored_card']"):
+        if app.session.element_is_display("//label[@for='stored_card']"):
             app.driver.find_element_by_xpath("//label[@for='new_card']").click()
     with pytest.allure.step("Check fields "):
-        app.warning.waitForElementXpath("//div[@class='card_face zf-changed']")
-        assert app.session.elementIsDisplay("//div[@class='card_face zf-changed']")
-        assert app.warning.getOuterText("//label[.='Номер карты']") == "НОМЕР КАРТЫ"
+        app.warning.wait_for_element_xpath("//div[@class='card_face zf-changed']")
+        assert app.session.element_is_display("//div[@class='card_face zf-changed']")
+        assert app.warning.get_outer_text("//label[.='Номер карты']") == "НОМЕР КАРТЫ"
     with pytest.allure.step("Logout from user account"):
-        app.pages.openMainPage()
+        app.pages.open_main_page()
         app.session.logout()
 
+
 @pytest.allure.step("Fill cash from with valid data")
-def test_fillCardForm(app):
+def test_fill_card_form(app):
     with pytest.allure.step("Open Cash page"):
-        app.pages.openCahsPage()
+        app.pages.open_cash_page()
     with pytest.allure.step("Switch in to the cash frame"):
-        app.pages.frameSwitch("//*[@id='cash']/iframe")
+        app.pages.frame_switch("//*[@id='cash']/iframe")
     with pytest.allure.step("Open cash form"):
         app.driver.find_element_by_xpath("//div[@class ='widget deposit_widget']").click()
-    #time.sleep(3)
+    # time.sleep(3)
     with pytest.allure.step("If user have saved cards, open form"):
-        if app.session.elementIsDisplay("//label[@for='stored_card']"):
+        if app.session.element_is_display("//label[@for='stored_card']"):
             app.driver.find_element_by_xpath("//label[@for='new_card']").click()
     with pytest.allure.step("Check fields "):
-        app.warning.waitForElementXpath("//div[@class='card_face zf-changed']")
-        assert app.session.elementIsDisplay("//div[@class='card_face zf-changed']")
-        assert app.warning.getOuterText("//label[.='Номер карты']") == "НОМЕР КАРТЫ"
+        app.warning.wait_for_element_xpath("//div[@class='card_face zf-changed']")
+        assert app.session.element_is_display("//div[@class='card_face zf-changed']")
+        assert app.warning.get_outer_text("//label[.='Номер карты']") == "НОМЕР КАРТЫ"
     with pytest.allure.step("Fill in card's form"):
-        app.cash.fillCardForm()
+        app.cash.fill_card_form()
     with pytest.allure.step("Logout from user account"):
-        app.pages.openMainPage()
+        app.pages.open_main_page()
         app.session.logout()
-    app.cash.fillCardForm()
+    app.cash.fill_card_form()
 
 
 @pytest.allure.step("Open poker client")
-def test_openGameClient(app):
+def test_open_game_client(app):
     with pytest.allure.step("Open main page"):
-        app.pages.openMainPage()
+        app.pages.open_main_page()
     with pytest.allure.step("LogIn"):
         app.session.login(LoginCred(username="triced", password="TestTest12"))
         time.sleep(0.2)

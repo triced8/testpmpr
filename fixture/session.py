@@ -11,17 +11,17 @@ class SessionHelper:
         self.warning = WarningMessages(self)
 
 
-    def openLoginPopup(self):
+    def open_login_popup(self):
         driver = self.app.driver
         # Open main page
-        self.app.openMainPageRu()
+        self.app.open_main_page_ru()
         # Open LogIn pop-up
         driver.find_element_by_xpath("//a[@href='#login']/span[@class='button__inner']").click()
         return driver
 
     def login(self, group):
-        driver = self.openLoginPopup()
-        self.currentUrl(endswith="#login")
+        driver = self.open_login_popup()
+        self.current_url(endswith="#login")
         # Fill in fields
         driver.find_element_by_name("login").clear()
         driver.find_element_by_name("login").send_keys(group.username)
@@ -31,16 +31,15 @@ class SessionHelper:
         driver.find_element_by_xpath("//form[@action='/login/']//div[@class='modala-button__text']").click()
         #driver.delete_all_cookies()
 
-
     def logout(self):
         driver = self.app.driver
         # Click on the logout button
         driver.find_element_by_xpath("//a[@href='/logout/']").click()
 
     # Fill fields at the login pop-up
-    def fillFieldsSeePasword(self, group):
-        driver = self.openLoginPopup()
-        self.currentUrl(endswith="#login")
+    def fill_fields_see_password(self, group):
+        driver = self.open_login_popup()
+        self.current_url(endswith="#login")
         # Fill in fields
         driver.find_element_by_name("login").clear()
         driver.find_element_by_name("login").send_keys(group.username)
@@ -49,33 +48,33 @@ class SessionHelper:
         driver.find_element_by_xpath("//div[@id='login']//span[@class='switch_pass']").click()
 
     # Compare user nickname with logged nickname
-    def isLoggedAs(self,  username):
+    def is_logged_as(self, username):
         driver = self.app.driver
         return driver.find_element_by_xpath("//div[@class='info-list__item info-list__item_type_nick']//a").text == username
 
     # Check that page have logout button
-    def isLoggedIn(self):
+    def is_logged_in(self):
         driver = self.app.driver
         return len(driver.find_elements_by_xpath("//a[@href='/logout/']")) > 0
 
     # If nickname is different logout and login
-    def ensureLogin(self, username):
-        if self.isLoggedIn():
-            if self.isLoggedAs(username):
+    def ensure_login(self, username):
+        if self.is_logged_in():
+            if self.is_logged_as(username):
                 return
             else:
                 self.logout()
         self.login(username)
 
     # Take xpath of the logout button
-    def userLogged(self):
+    def user_logged(self):
         xpath = "//a[@href='/logout/']"
-        return self.checkExistsByXpath(xpath)
+        return self.check_exists_by_xpath(xpath)
 
 
     # Check that element is Exists on the page
 
-    def checkExistsByXpath(self, xpath):
+    def check_exists_by_xpath(self, xpath):
         driver = self.app.driver
         try:
             driver.find_element_by_xpath(xpath)
@@ -83,8 +82,7 @@ class SessionHelper:
             return False
         return True
 
-
-    def currentUrl(self, endswith):
+    def current_url(self, endswith):
         driver = self.app.driver
         assert driver.current_url.endswith(endswith)
 
@@ -97,23 +95,23 @@ class SessionHelper:
             self.app.openMainPage()
             self.logout()
     """
-    def elementIsDisplay(self, xpath):
+    def element_is_display(self, xpath):
         driver = self.app.driver
         element = driver.find_element_by_xpath(xpath)
         return element.is_displayed()
 
     # Enter Captcha if is enable
-    def captchaEntering(self):
+    def captcha_entering(self):
         xpath = "//div[@id='login']/div[@role='document']//form[@action='/login/']//input[@name='captcha']"
         driver = self.app.driver
         element = driver.find_element_by_xpath(xpath)
         time.sleep(0.1)
-        if self.elementIsDisplay(xpath):
+        if self.element_is_display(xpath):
             element.send_keys("1111")
             driver.find_element_by_xpath("//form[@action='/login/']//div[@class='modala-button__text']").click()
 
     # Click outside the login pop-up
-    def clickOutSide(self):
+    def click_out_side(self):
         driver = self.app.driver
         action = ActionChains(driver)
         action.move_by_offset(5, 5).click()

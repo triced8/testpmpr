@@ -8,6 +8,7 @@ from fixture.warningMessages import WarningMessages
 from fixture.cash import Cash
 from fixture.textru import TextRu
 
+
 class Application:
 
     def __init__(self, browser):
@@ -31,15 +32,14 @@ class Application:
         self.cash = Cash(self)
         self.text = TextRu(self)
 
-
-    def openMainPageRu(self):
+    def open_main_page_ru(self):
         driver = self.driver
 
         #    return
         driver.get("https://beta.pokermatch.com/ru")
 
     # Check that fixture is valid
-    def isValide(self):
+    def is_valid(self):
         try:
             self.driver.current_url()
             return True
@@ -49,5 +49,3 @@ class Application:
     # Destroy fixture
     def destroy(self):
         self.driver.quit()
-
-

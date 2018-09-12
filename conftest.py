@@ -8,7 +8,7 @@ fixture = None
 def app(request):
     global fixture
     browser = request.config.getoption("--browser")
-    if fixture is None or fixture.isValide():
+    if fixture is None or fixture.is_valid():
         fixture = Application(browser=browser)
     fixture.driver.fullscreen_window()
     request.addfinalizer(fixture.destroy)
@@ -21,7 +21,7 @@ def app1(request):
     if fixture is None:
         fixture = Application(browser="chrome")
     else:
-        if not fixture.isValide():
+        if not fixture.is_valid():
             fixture = Application(browser="chrome")
     request.addfinalizer(fixture.destroy)
     fixture.driver.fullscreen_window()
