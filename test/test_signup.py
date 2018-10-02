@@ -1,4 +1,6 @@
 import time
+
+from fixture.warningMessages import element_is_display
 from model.credSignup import SignupCred
 import pytest
 from random import randrange
@@ -212,4 +214,4 @@ def test_close_outside(app):
     with pytest.allure.step("Click out side pop-up"):
         app.session.click_out_side()
     with pytest.allure.step("Asser that pup-up is closed"):
-        assert not app.session.element_is_display("//div[@id='registration']//h4[@class='modala__title']")
+        assert not element_is_display(app.session.app, "//div[@id='registration']//h4[@class='modala__title']")

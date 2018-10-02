@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 import time
+
 from fixture.warningMessages import WarningMessages
 from selenium.webdriver import ActionChains
 
@@ -10,31 +11,30 @@ class SessionHelper:
         self.app = app
         self.warning = WarningMessages(self)
 
-
     def open_login_popup(self):
         driver = self.app.driver
         # Open main page
         self.app.open_main_page_ru()
         # Open LogIn pop-up
-        driver.find_element_by_xpath("//a[@href='#login']/span[@class='button__inner']").click()
+        driver.find_element_by_xpath(self.app.selectors.login_button).click()
         return driver
 
     def login(self, group):
         driver = self.open_login_popup()
         self.current_url(endswith="#login")
         # Fill in fields
-        driver.find_element_by_name("login").clear()
-        driver.find_element_by_name("login").send_keys(group.username)
-        driver.find_element_by_xpath("(//input[@name='password'])[2]").clear()
-        driver.find_element_by_xpath("(//input[@name='password'])[2]").send_keys(group.password)
+        driver.find_element_by_name(self.app.selectors.login_field).clear()
+        driver.find_element_by_name(self.app.selectors.login_field).send_keys(group.username)
+        driver.find_element_by_xpath(self.app.selectors.login_password_field).clear()
+        driver.find_element_by_xpath(self.app.selectors.login_password_field).send_keys(group.password)
         # Click on the login button
-        driver.find_element_by_xpath("//form[@action='/login/']//div[@class='modala-button__text']").click()
+        driver.find_element_by_xpath(self.app.selectors.login_button_form).click()
         #driver.delete_all_cookies()
 
     def logout(self):
         driver = self.app.driver
         # Click on the logout button
-        driver.find_element_by_xpath("//a[@href='/logout/']").click()
+        driver.find_element_by_xpath(self.app.selectors.logout_button).click()
 
     # Fill fields at the login pop-up
     def fill_fields_see_password(self, group):
@@ -95,10 +95,6 @@ class SessionHelper:
             self.app.openMainPage()
             self.logout()
     """
-    def element_is_display(self, xpath):
-        driver = self.app.driver
-        element = driver.find_element_by_xpath(xpath)
-        return element.is_displayed()
 
     # Enter Captcha if is enable
     def captcha_entering(self):
@@ -117,3 +113,7 @@ class SessionHelper:
         action.move_by_offset(5, 5).click()
         action.perform()
 
+    def element_is_display(self, xpath):
+        driver = self.app.driver
+        element = driver.find_element_by_xpath(xpath)
+        return element.is_displayed()

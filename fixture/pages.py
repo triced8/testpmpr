@@ -10,21 +10,21 @@ class Pages:
 
     def open_main_page(self):
         driver = self.app.driver
-        driver.get("https://beta.pokermatch.com/ru")
+        driver.get(self.app.selectors.site_ru)
 
     def open_forgot_password_page(self):
         driver = self.app.driver
-        driver.get("https://beta.pokermatch.com/ru/page/passwordreminder")
-        assert self.app.warning.get_outer_text(xpath="//h2[@class='content__title']") == "ВОССТАНОВИТЬ ПАРОЛЬ"
+        driver.get(self.app.selectors.forgot_password)
+        assert self.app.warning.get_outer_text(xpath=self.app.selectors.page_header_h2) == "ВОССТАНОВИТЬ ПАРОЛЬ"
 
     def open_cash_page(self):
         driver = self.app.driver
         self.open_main_page()
         self.app.session.login(LoginCred(username="triced ", password="TestTest12"))
         time.sleep(1)
-        driver.find_element_by_xpath("//a[@class='button button_type_link   head__elem my_cash']").click()
-        assert self.app.warning.get_outer_text("//h2[@class='content__title']") == "ИНФОРМАЦИЯ ПОЛЬЗОВАТЕЛЯ"
-        self.app.warning.wait_for_element_xpath("//*[@id='cash']/iframe")
+        driver.find_element_by_xpath(self.app.selectors.cash_button).click()
+        assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == "ПОПОЛНИТЬ"
+
 
     def frame_switch(self, xpath):
         driver = self.app.driver
@@ -34,7 +34,7 @@ class Pages:
         options = Options()
         driver = self.app.driver
         self.open_main_page()
-        driver.find_element_by_xpath("//a[@href='/download/win']/span[@class='button__inner']").click()
+        driver.find_element_by_xpath(self.app.selectors.download_client_mac).click()
         options.set_preference("browser.safebrowsing.downloads.enabled", True)
         options.set_preference("browser.download.folderList", 1)
         options.set_preference("browser.download.manager.showWhenStarting", False)

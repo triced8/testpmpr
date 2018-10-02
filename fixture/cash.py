@@ -1,5 +1,7 @@
 from selenium.webdriver import ActionChains
 import time
+from fixture import selectors
+from fixture.session import SessionHelper
 
 """
 Number: 4000 0000 0000 0002
@@ -8,12 +10,25 @@ Holder: Dmitry
 CVV: 111
 """
 
+cash_button_list = selectors.Selectors.cash_button_ua_list
+cash_field = selectors.Selectors.cash_field_list
+
 
 class Cash:
 
     def __init__(self, app):
         self.app = app
 
+    def open_inner_frame(self):
+        driver = self.app.driver
+        for i in cash_button_list:
+            driver.find_element_by_xpath(i).click()
+            for j in cash_field:
+                self.app.session.element_is_display(j)
+
+
+
+"""
     def fill_card_form(self):
         driver = self.app.driver
         amount = "200"
@@ -46,3 +61,4 @@ class Cash:
         self.app.warning.wait_for_element_xpath("//div[@class='payment_message success']")
         assert self.app.warning.get_outer_text(
             "//div[@class='payment_details no_voucher']//p[2]") == "Сумма: " + amount + " UAH"
+"""

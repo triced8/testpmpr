@@ -1,4 +1,3 @@
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -37,3 +36,5 @@ class WarningMessages:
         waitElement = WebDriverWait(self.app.driver, 5).until(
             EC.visibility_of_element_located((By.NAME, nameElement)))
         return waitElement
+
+

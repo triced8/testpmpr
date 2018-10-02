@@ -5,4 +5,4 @@ class AdminHelper:
 
     def open(self):
         driver = self.app.driver
-        driver.get("https://beta.pokermatch.com/sa")
+        driver.get(self.app.Selectors.site_admin)

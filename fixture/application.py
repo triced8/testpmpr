@@ -7,7 +7,7 @@ from fixture.admin import AdminHelper
 from fixture.warningMessages import WarningMessages
 from fixture.cash import Cash
 from fixture.textru import TextRu
-
+from fixture.selectors import Selectors
 
 class Application:
 
@@ -31,12 +31,13 @@ class Application:
         self.pages = Pages(self)
         self.cash = Cash(self)
         self.text = TextRu(self)
+        self.selectors = Selectors(self)
 
     def open_main_page_ru(self):
         driver = self.driver
 
         #    return
-        driver.get("https://beta.pokermatch.com/ru")
+        driver.get(self.selectors.site_ru)
 
     # Check that fixture is valid
     def is_valid(self):

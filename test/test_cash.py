@@ -6,6 +6,16 @@ import pytest
 random = randrange(100000000)
 
 
+@pytest.allure.step("Open inner frame at the cash page")
+def test_open(app):
+    with pytest.allure.step("Open Cash page with login"):
+        app.pages.open_cash_page()
+    with pytest.allure.step("Open inner frame for UAH"):
+        app.cash.open_inner_frame()
+    with pytest.allure.step("Logout from account"):
+        app.session.logout()
+
+"""
 @pytest.allure.step("Open cash page")
 def test_open_cash_page(app):
     with pytest.allure.step("Open Cash page"):
@@ -81,4 +91,5 @@ def test_open_game_client(app):
     with pytest.allure.step("Switch to sate"):
         app.driver.switch_to_window(app.driver.window_handles[0])
     with pytest.allure.step("Logout from user account"):
-        app.session.logout()
+        app.session.logout() """
+
