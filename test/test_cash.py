@@ -7,19 +7,50 @@ random = randrange(100000000)
 
 
 @pytest.allure.step("Open inner frame at the cash page")
-def test_open(app):
+def test_open_inner_frames(app):
     with pytest.allure.step("Open Cash page with login"):
         app.pages.open_cash_page()
-    with pytest.allure.step("Open inner frame for UAH"):
-        app.cash.open_inner_frame()
+    with pytest.allure.step("Open inner frames for UAH"):
+        app.cash.open_inner_frames()
     with pytest.allure.step("Logout from account"):
         app.session.logout()
+
+
+@pytest.allure.step("Open inner frame PayMega")
+def test_use_paymega(app):
+    with pytest.allure.step("Open Cash page with login"):
+        app.pages.open_cash_page()
+        app.session.element_is_display("//div[@class='content']//div[@class='pm_cash__table pm_cash__table_in']/div[3]/div[@class='pm_cash__container']/iframe")
+    with pytest.allure.step("Open paymega inner frames for UAH"):
+        app.cash.open_inner_frame(xpath_cash=app.selectors.paymega_uah_cashin_button, xpath=app.selectors.paymega_cash_field)
+    with pytest.allure.step("Fill cash field"):
+        time.sleep(2)
+        app.cash.fill_inner_frame(app.selectors.paymega_cash_field)
+    with pytest.allure.step("Logout from account"):
+        app.session.logout()
+
+
+@pytest.allure.step("Open inner frame ecommpay")
+def test_use_ecommpay(app):
+    with pytest.allure.step("Open Cash page with login"):
+        app.pages.open_cash_page()
+    with pytest.allure.step("Open paymega inner frames for UAH"):
+        app.cash.open_inner_frame(xpath_cash=app.selectors.ecommpay_uah_cashin_button_2, xpath=app.selectors.ecommpay_cash_field) # ecommpay_cash_field check the button is displayed
+    with pytest.allure.step("Fill and send data at the ecommpay form"):
+        app.cash.fill_ecommpay_fields()
+    with pytest.allure.step("Return to main window"):
+        app.driver.switch_to.default_content()
+    with pytest.allure.step("Check event message"):
+        assert app.warning.get_outer_text(app.selectors.event_message) == app.text.cash_in_event_message_ru
+    with pytest.allure.step("Logout from account"):
+        app.session.logout()
+
 
 """
 @pytest.allure.step("Open cash page")
 def test_open_cash_page(app):
     with pytest.allure.step("Open Cash page"):
-        app.pages.open_cash_page()
+        app.pages.open_cash_page() 
     with pytest.allure.step("Switch in to the cash frame"):
         app.pages.frame_switch("//*[@id='cash']/iframe")
     with pytest.allure.step("Assert that page is opened"):

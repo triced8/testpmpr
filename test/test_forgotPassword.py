@@ -23,46 +23,12 @@ def test_valid_email(app):
             "//h2[@class='main_title']") == "Мы отправили Вам ссылку для авторизации. Вы сможете сменить пароль в настройках профиля"
 
 
-@pytest.allure.step("Forgot password With Space before Email")
-def test_email_with_space_before(app):
-    with pytest.allure.step("Open Forgot Password page"):
-        app.pages.open_forgot_password_page()
-    with pytest.allure.step("Enter Space before Email"):
-        app.driver.find_element_by_xpath("//input[@id='email']").send_keys(" triced8@gmail.com")
-    with pytest.allure.step("Enter Email in to the 'captcha' field"):
-        app.driver.find_element_by_xpath("//input[@id='captcha']").send_keys("1111")
-    with pytest.allure.step("Click on the 'Send' button"):
-        app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
-    time.sleep(0.1)
-    with pytest.allure.step("Check current URL after sending email"):
-        app.session.current_url("/confirmation/")
-    with pytest.allure.step("Check warning message"):
-        assert app.warning.get_outer_text("//h2[@class='main_title']") == "Пожалуйста, проверьте Ваш e-mail ящик"
-
-
-@pytest.allure.step("Forgot password With space after Email")
-def test_email_with_space_after(app):
-    with pytest.allure.step("Open Forgot Password page"):
-        app.pages.open_forgot_password_page()
-    with pytest.allure.step("Enter Space after Email"):
-        app.driver.find_element_by_xpath("//input[@id='email']").send_keys("triced8@gmail.com ")
-    with pytest.allure.step("Enter Email in to the 'captcha' field"):
-        app.driver.find_element_by_xpath("//input[@id='captcha']").send_keys("1111")
-    with pytest.allure.step("Click on the 'Send' button"):
-        app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
-    time.sleep(0.1)
-    with pytest.allure.step("Check current URL after sending email"):
-        app.session.current_url("/confirmation/")
-    with pytest.allure.step("Check warning message"):
-        assert app.warning.get_outer_text("//h2[@class='main_title']") == "Пожалуйста, проверьте Ваш e-mail ящик"
-
-
 @pytest.allure.step("Forgot password With UpperCase Email")
 def test_email_upper(app):
     with pytest.allure.step("Open Forgot Password page"):
         app.pages.open_forgot_password_page()
     with pytest.allure.step("Enter Email with uppercase"):
-        app.driver.find_element_by_xpath("//input[@id='email']").send_keys("triced8@gmail.com").upper()
+        app.driver.find_element_by_xpath("//input[@id='email']").send_keys("triced8@gmail.com".upper())
     with pytest.allure.step("Enter Email in to the 'captcha' field"):
         app.driver.find_element_by_xpath("//input[@id='captcha']").send_keys("1111")
     with pytest.allure.step("Click on the 'Send' button"):
@@ -138,6 +104,42 @@ def test_email_not_exist(app):
 """
 
 
+"""
+@pytest.allure.step("Forgot password With Space before Email")
+def test_email_with_space_before(app):
+    with pytest.allure.step("Open Forgot Password page"):
+        app.pages.open_forgot_password_page()
+    with pytest.allure.step("Enter Space before Email"):
+        app.driver.find_element_by_xpath("//input[@id='email']").send_keys(" triced8@gmail.com")
+    with pytest.allure.step("Enter Email in to the 'captcha' field"):
+        app.driver.find_element_by_xpath("//input[@id='captcha']").send_keys("1111")
+    with pytest.allure.step("Click on the 'Send' button"):
+        app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
+    time.sleep(0.1)
+    with pytest.allure.step("Check current URL after sending email"):
+        app.session.current_url("/confirmation/")
+    with pytest.allure.step("Check warning message"):
+        assert app.warning.get_outer_text("//h2[@class='main_title']") == "Пожалуйста, проверьте Ваш e-mail ящик"
+
+
+@pytest.allure.step("Forgot password With space after Email")
+def test_email_with_space_after(app):
+    with pytest.allure.step("Open Forgot Password page"):
+        app.pages.open_forgot_password_page()
+    with pytest.allure.step("Enter Space after Email"):
+        app.driver.find_element_by_xpath("//input[@id='email']").send_keys("triced8@gmail.com ")
+    with pytest.allure.step("Enter Email in to the 'captcha' field"):
+        app.driver.find_element_by_xpath("//input[@id='captcha']").send_keys("1111")
+    with pytest.allure.step("Click on the 'Send' button"):
+        app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
+    time.sleep(0.1)
+    with pytest.allure.step("Check current URL after sending email"):
+        app.session.current_url("/confirmation/")
+    with pytest.allure.step("Check warning message"):
+        assert app.warning.get_outer_text("//h2[@class='main_title']") == "Пожалуйста, проверьте Ваш e-mail ящик"
+
+
+
 @pytest.allure.step("Forgot password without AT Email")
 def test_email_without_at(app):
     with pytest.allure.step("Open Forgot Password page"):
@@ -155,7 +157,7 @@ def test_email_without_at(app):
         assert app.warning.get_border_color("//input[@id='email']") == "rgba(187, 37, 37, 1)"
 
 
-@pytest.allure.step("Forgot password Withot Domain")
+@pytest.allure.step("Forgot password Without Domain")
 def test_email_without_domain(app):
     with pytest.allure.step("Open Forgot Password page"):
         app.pages.open_forgot_password_page()
@@ -172,7 +174,7 @@ def test_email_without_domain(app):
         assert app.warning.get_border_color("//input[@id='email']") == "rgba(187, 37, 37, 1)"
 
 
-@pytest.allure.step("Forgot password Withot Dot com")
+@pytest.allure.step("Forgot password Without Dot com")
 def test_email_without_dotcom(app):
     with pytest.allure.step("Open Forgot Password page"):
         app.pages.open_forgot_password_page()
@@ -189,7 +191,7 @@ def test_email_without_dotcom(app):
         assert app.warning.get_border_color("//input[@id='captcha']") == "rgba(187, 37, 37, 1)"
 
 
-@pytest.allure.step("Forgot password Withot Email name")
+@pytest.allure.step("Forgot password Without Email name")
 def test_email_without_email_name(app):
     with pytest.allure.step("Open Forgot Password page"):
         app.pages.open_forgot_password_page()
@@ -206,7 +208,7 @@ def test_email_without_email_name(app):
         assert app.warning.get_border_color("//input[@id='captcha']") == "rgba(187, 37, 37, 1)"
 
 
-@pytest.allure.step("Forgot password Withot Dot")
+@pytest.allure.step("Forgot password Without Dot")
 def test_email_without_dot(app):
     with pytest.allure.step("Open Forgot Password page"):
         app.pages.open_forgot_password_page()
@@ -221,3 +223,5 @@ def test_email_without_dot(app):
             "//div[@class='password_reminder_fields']/span[2]") == "E-mail не существует или не подтвержден"
     with pytest.allure.step("Check warning boarder at the 'email' field"):
         assert app.warning.get_border_color("//input[@id='captcha']") == "rgba(187, 37, 37, 1)"
+
+"""

@@ -1,6 +1,6 @@
 import time
 
-from fixture.warningMessages import element_is_display
+
 from model.credLogin import LoginCred
 from random import randrange
 import pytest
@@ -101,7 +101,7 @@ def test_close_outside(app):
     with pytest.allure.step("Click outside pop-up"):
         app.session.click_out_side()
     with pytest.allure.step("Sign In button is not at the page"):
-        assert not element_is_display(app.session.app, "//form[@action='/login/']//div[@class='modala-button__text']")
+        assert not app.session.element_is_display("//form[@action='/login/']//div[@class='modala-button__text']")
 
 
 @pytest.allure.step("See password button")

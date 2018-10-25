@@ -13,10 +13,6 @@ def test_sign_up_empty(app):
             app.session.logout()
         else:
             app.registration.sign_up(SignupCred(email="", username="", password="", captcha=""))
-
-#    if app.registration.error_sign_up():
-#        test_sign_up_empty(app)
-
     with pytest.allure.step("Turn off PP captcha"):
         app.driver.find_element_by_xpath(
             "//div[@id='registration']//div[@class='modala__agreement_wrapper']//span[@class='checkbox__box']").click()
@@ -47,63 +43,6 @@ def test_sign_up_empty(app):
         assert app.warning.get_border_color("//*[@id='registration']//div[6]/div") == "rgba(187, 37, 37, 1)"
     with pytest.allure.step("Border for captcha field"):
         assert app.warning.get_border_color("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"
-
-
-@pytest.allure.step("Sign Up with empty email field")
-def test_sign_up_empty_email(app):
-    with pytest.allure.step("If user is logged"):
-        if app.session.user_logged():
-            app.open_main_page_ru()
-            app.session.logout()
-        else:
-            app.registration.sign_up(
-                SignupCred(email="", username="triced" + str(random), password="TestTest12", captcha="1111"))
-        # Error message for email field
-    with pytest.allure.step("Check empty email field error"):
-        assert app.warning.get_outer_text(
-            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][1]") == "Поле обязательно для заполнения"
-    # Border for email field
-    with pytest.allure.step("Border for email field"):
-        assert app.warning.get_border_color("//input[@name='email']") == "rgba(187, 37, 37, 1)"
-
-
-@pytest.allure.step("Sign Up with empty nickname field")
-def test_sign_up_empty_nick(app):
-    with pytest.allure.step("If user is logged"):
-        if app.session.user_logged():
-            app.open_main_page_ru()
-            app.session.logout()
-        else:
-            app.registration.sign_up(
-                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="", password="TestTest12",
-                           captcha="1111"))
-    # Error message for NickName field
-    with pytest.allure.step("Check empty nickname field error"):
-        assert app.warning.get_outer_text(
-            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][1]") == "Поле обязательно для заполнения"
-    # Border for nickname field
-    with pytest.allure.step("Border for nickname field"):
-        assert app.warning.get_border_color("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
-
-
-@pytest.allure.step("Sign Up with empty password field")
-def test_sign_up_empty_password(app):
-    with pytest.allure.step("If user is logged"):
-        if app.session.user_logged():
-            app.open_main_page_ru()
-            app.session.logout()
-        else:
-            app.registration.sign_up(
-                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random), password="",
-                           captcha="1111"))
-    # Error message for password field
-    with pytest.allure.step("Check empty password field error"):
-        assert app.warning.get_outer_text(
-            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'password'][1]") == "Поле обязательно для заполнения"
-    # Border for password field
-    with pytest.allure.step("Border for password field"):
-        assert app.warning.get_border_color(
-            "//div[@id='registration']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
 
 
 @pytest.allure.step("Sign Up with empty checkbox")
@@ -167,6 +106,67 @@ def test_signup_with_exist_email(app):
         assert app.warning.get_border_color("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
+@pytest.allure.step("Sign Up with wrong captcha")
+def test_sign_up_password_wrong_captcha(app):
+    random = randrange(1000000000)
+    with pytest.allure.step("If user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            app.registration.sign_up(
+                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
+                           password="TestTest12",
+                           captcha="1234"))
+    # Error message for captcha field
+    with pytest.allure.step("Error with wrong captcha for captcha field"):
+        assert app.warning.get_outer_text(
+            "//div[@class='modala-captcha__wrapper']/span[2]") == "Введено неверное значение"
+    # Border for captcha field
+    with pytest.allure.step("Border for captcha field"):
+        assert app.warning.get_border_color("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"
+
+
+@pytest.allure.step("Sign Up with exist nickname")
+def test_signup_exist_nick(app):
+    with pytest.allure.step("If user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            app.registration.sign_up(
+                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="tricedu", password="TestTest12",
+                           captcha="1111"))
+    # Error message for NickName field
+    with pytest.allure.step("Error with exist nickname for nickname field"):
+        assert app.warning.get_outer_text(
+            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][4]") == "Этот логин уже занят"
+    # Border for nickname field
+    with pytest.allure.step("Border for nickname field"):
+        assert app.warning.get_border_color("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+
+
+@pytest.allure.step("Sign Up with special symbols in the nickname")
+def test_sign_up_nick_with_special(app):
+    random = randrange(1000000000)
+    with pytest.allure.step("If user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            app.registration.sign_up(
+                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced+" + str(random),
+                           password="TestTest12", captcha="1111"))
+    # Error message for NickName field
+    with pytest.allure.step("Error with incorrect nickname for nickname field"):
+        assert app.warning.get_outer_text(
+            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
+    # Border for nickname field
+    with pytest.allure.step("Border for nickname field"):
+        assert app.warning.get_border_color("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+
+
+"""
 @pytest.allure.step("Sign Up without AT in email")
 def test_signup_without_AT(app):
     with pytest.allure.step("If user is logged"):
@@ -267,25 +267,6 @@ def test_signup_without_dot(app):
         assert app.warning.get_border_color("//input[@name='email']") == "rgba(187, 37, 37, 1)"
 
 
-@pytest.allure.step("Sign Up with exist nickname")
-def test_signup_exist_nick(app):
-    with pytest.allure.step("If user is logged"):
-        if app.session.user_logged():
-            app.open_main_page_ru()
-            app.session.logout()
-        else:
-            app.registration.sign_up(
-                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="tricedu", password="TestTest12",
-                           captcha="1111"))
-    # Error message for NickName field
-    with pytest.allure.step("Error with exist nickname for nickname field"):
-        assert app.warning.get_outer_text(
-            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][4]") == "Этот логин уже занят"
-    # Border for nickname field
-    with pytest.allure.step("Border for nickname field"):
-        assert app.warning.get_border_color("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
-
-
 @pytest.allure.step("Sign Up with space in the middle of nickname")
 def test_sign_up_nick_space_middle(app):
     random = randrange(1000000000)
@@ -296,26 +277,6 @@ def test_sign_up_nick_space_middle(app):
         else:
             app.registration.sign_up(
                 SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + " " + str(random),
-                           password="TestTest12", captcha="1111"))
-    # Error message for NickName field
-    with pytest.allure.step("Error with incorrect nickname for nickname field"):
-        assert app.warning.get_outer_text(
-            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][3]") == "Разрешены только a-z, 0-9 и _ символы"
-    # Border for nickname field
-    with pytest.allure.step("Border for nickname field"):
-        assert app.warning.get_border_color("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
-
-
-@pytest.allure.step("Sign Up with special symbols in the nickname")
-def test_sign_up_nick_with_special(app):
-    random = randrange(1000000000)
-    with pytest.allure.step("If user is logged"):
-        if app.session.user_logged():
-            app.open_main_page_ru()
-            app.session.logout()
-        else:
-            app.registration.sign_up(
-                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced+" + str(random),
                            password="TestTest12", captcha="1111"))
     # Error message for NickName field
     with pytest.allure.step("Error with incorrect nickname for nickname field"):
@@ -407,22 +368,60 @@ def test_sign_up_password_empty(app):
             "//div[@id='registration']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
 
 
-@pytest.allure.step("Sign Up with wrong captcha")
-def test_sign_up_password_wrong_captcha(app):
-    random = randrange(1000000000)
+@pytest.allure.step("Sign Up with empty email field")
+def test_sign_up_empty_email(app):
     with pytest.allure.step("If user is logged"):
         if app.session.user_logged():
             app.open_main_page_ru()
             app.session.logout()
         else:
             app.registration.sign_up(
-                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                           password="TestTest12",
-                           captcha="1234"))
-    # Error message for captcha field
-    with pytest.allure.step("Error with wrong captcha for captcha field"):
+                SignupCred(email="", username="triced" + str(random), password="TestTest12", captcha="1111"))
+        # Error message for email field
+    with pytest.allure.step("Check empty email field error"):
         assert app.warning.get_outer_text(
-            "//div[@class='modala-captcha__wrapper']/span[2]") == "Введено неверное значение"
-    # Border for captcha field
-    with pytest.allure.step("Border for captcha field"):
-        assert app.warning.get_border_color("//div[@id='registration']//input[@name='captcha']") == "rgba(187, 37, 37, 1)"
+            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'email'][1]") == "Поле обязательно для заполнения"
+    # Border for email field
+    with pytest.allure.step("Border for email field"):
+        assert app.warning.get_border_color("//input[@name='email']") == "rgba(187, 37, 37, 1)"
+
+
+@pytest.allure.step("Sign Up with empty nickname field")
+def test_sign_up_empty_nick(app):
+    with pytest.allure.step("If user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            app.registration.sign_up(
+                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="", password="TestTest12",
+                           captcha="1111"))
+    # Error message for NickName field
+    with pytest.allure.step("Check empty nickname field error"):
+        assert app.warning.get_outer_text(
+            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'login'][1]") == "Поле обязательно для заполнения"
+    # Border for nickname field
+    with pytest.allure.step("Border for nickname field"):
+        assert app.warning.get_border_color("//input[@name='nick']") == "rgba(187, 37, 37, 1)"
+
+
+@pytest.allure.step("Sign Up with empty password field")
+def test_sign_up_empty_password(app):
+    with pytest.allure.step("If user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            app.registration.sign_up(
+                SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random), password="",
+                           captcha="1111"))
+    # Error message for password field
+    with pytest.allure.step("Check empty password field error"):
+        assert app.warning.get_outer_text(
+            "//div[@id='registration']//span[@class='modala__error' and @data-validation-field = 'password'][1]") == "Поле обязательно для заполнения"
+    # Border for password field
+    with pytest.allure.step("Border for password field"):
+        assert app.warning.get_border_color(
+            "//div[@id='registration']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
+
+"""

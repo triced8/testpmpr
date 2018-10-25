@@ -29,7 +29,7 @@ class SessionHelper:
         driver.find_element_by_xpath(self.app.selectors.login_password_field).send_keys(group.password)
         # Click on the login button
         driver.find_element_by_xpath(self.app.selectors.login_button_form).click()
-        #driver.delete_all_cookies()
+        self.app.pages.change_to_ru()
 
     def logout(self):
         driver = self.app.driver
@@ -110,7 +110,7 @@ class SessionHelper:
     def click_out_side(self):
         driver = self.app.driver
         action = ActionChains(driver)
-        action.move_by_offset(5, 5).click()
+        action.move_by_offset(50, 50).click()
         action.perform()
 
     def element_is_display(self, xpath):

@@ -25,7 +25,6 @@ class Pages:
         driver.find_element_by_xpath(self.app.selectors.cash_button).click()
         assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == "ПОПОЛНИТЬ"
 
-
     def frame_switch(self, xpath):
         driver = self.app.driver
         driver.switch_to.frame(driver.find_element_by_xpath(xpath))
@@ -41,3 +40,16 @@ class Pages:
         options.set_preference("browser.download.dir", "/data")
         options.set_preference("browser.helperApps.neverAsk.saveToDisk", "/Users/d.demchenko/Desktop/blabla.dmg")
         time.sleep(20)
+
+    def event_message(self, xpath):
+        driver = self.app.driver
+
+    def change_to_ru(self):
+        driver = self.app.driver
+        language = self.app.selectors.language
+        used_language = self.app.warning.get_outer_text(language)
+        if used_language == "УКР" or used_language == "ENG":
+            driver.find_element_by_xpath(self.app.selectors.language).click()
+            self.app.warning.wait_for_element_xpath(self.app.selectors.language_ru)
+            driver.find_element_by_xpath(self.app.selectors.language_ru).click()
+

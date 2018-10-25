@@ -1,7 +1,7 @@
 from selenium.webdriver import ActionChains
 import time
 from fixture import selectors
-from fixture.session import SessionHelper
+
 
 """
 Number: 4000 0000 0000 0002
@@ -19,12 +19,39 @@ class Cash:
     def __init__(self, app):
         self.app = app
 
-    def open_inner_frame(self):
+    def open_inner_frames(self):
         driver = self.app.driver
         for i in cash_button_list:
             driver.find_element_by_xpath(i).click()
             for j in cash_field:
                 self.app.session.element_is_display(j)
+
+
+    def open_inner_frame(self, xpath_cash, xpath):
+        driver = self.app.driver
+        driver.find_element_by_xpath(xpath_cash).click()
+        self.app.session.element_is_display(xpath)
+
+    def fill_inner_frame(self, xpath):
+        driver = self.app.driver
+        time.sleep(1)
+        driver.find_element_by_xpath(xpath).send_keys("400")
+        driver.find_element_by_xpath("//div[@class='pm_cash__table pm_cash__table_in']/div[3]//form[@class='pm_cash__left']//span[@class='button__inner']").click()
+
+    def fill_ecommpay_fields(self,):
+        driver = self.app.driver
+        self.app.warning.wait_for_element_xpath(self.app.selectors.ecommpay_inner_cash_button)
+        driver.find_element_by_xpath(self.app.selectors.ecommpay_inner_cash_button).click()
+        self.app.pages.frame_switch("//div[@class='pm_cash__table pm_cash__table_in']/div[5]//iframe")
+        self.app.warning.wait_for_element_xpath("//input[@class='card_number'][1]")
+        driver.find_element_by_xpath("//input[@class='card_number'][1]").send_keys("4020000000000000")
+        driver.find_element_by_xpath("//input[@name='exp_month']").send_keys("11")
+        driver.find_element_by_xpath("//input[@id='year']").send_keys("23")
+        driver.find_element_by_xpath("//input[@name='holder']").send_keys("ABD CDE")
+        driver.find_element_by_xpath("//input[@name='cvv']").send_keys("321")
+        driver.find_element_by_xpath("//input[@type='submit']").click()
+        time.sleep(3)
+
 
 
 

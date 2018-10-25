@@ -74,6 +74,25 @@ def test_login_not_exist_user(app):
         app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
 
 
+@pytest.allure.step("Login with caps password")
+def test_login_password_caps(app):
+    with pytest.allure.step("Login with caps password"):
+        app.session.login(LoginCred(username=".triced", password="TestTest12".upper()))
+    with pytest.allure.step("Enter captcha if it visible"):
+        app.session.captcha_entering()
+    with pytest.allure.step("Password warning message"):
+        assert app.warning.get_outer_text(
+            "(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
+    with pytest.allure.step("Password field's boarder color Assert"):
+        assert app.warning.get_border_color("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
+    with pytest.allure.step("Login field's boarder color Assert"):
+        assert app.warning.get_border_color("//input[@name='login']") == "rgba(187, 37, 37, 1)"
+    with pytest.allure.step("Close login pop-up by close(x) button"):
+        app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
+
+
+"""
+
 @pytest.allure.step("Login with dot after nickname")
 def test_nick_name_with_dote_after(app):
     with pytest.allure.step("Login with dot after nickname"):
@@ -124,19 +143,4 @@ def test_nick_name_with_dote_before(app):
     with pytest.allure.step("Close login pop-up by close(x) button"):
         app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
 
-
-@pytest.allure.step("Login with caps password")
-def test_login_password_caps(app):
-    with pytest.allure.step("Login with caps password"):
-        app.session.login(LoginCred(username=".triced", password="TestTest12".upper()))
-    with pytest.allure.step("Enter captcha if it visible"):
-        app.session.captcha_entering()
-    with pytest.allure.step("Password warning message"):
-        assert app.warning.get_outer_text(
-            "(//input[@name='password'])[2]/following::div[1]") == "Почта или пароль указаны неверно"
-    with pytest.allure.step("Password field's boarder color Assert"):
-        assert app.warning.get_border_color("//div[@id='login']//input[@name='password'][2]") == "rgba(187, 37, 37, 1)"
-    with pytest.allure.step("Login field's boarder color Assert"):
-        assert app.warning.get_border_color("//input[@name='login']") == "rgba(187, 37, 37, 1)"
-    with pytest.allure.step("Close login pop-up by close(x) button"):
-        app.driver.find_element_by_xpath("//div[@id='login']//button[@aria-label='Close']").click()
+"""

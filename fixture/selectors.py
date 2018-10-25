@@ -14,6 +14,10 @@ class Selectors:
     header_menu_promo = "//a[@class='main_menu_element promo ']"  # Promo/Акции
     header_menu_about = "//a[@class='main_menu_element about ']"  # About
     header_menu_payments = "//a[@class='main_menu_element payments  ']"  # Payments/Платежи
+    language = "//div[@id = 'languages']"  # language button
+    language_ru = "//span[contains(text(),'Рус')]"  # Rus language button from the drop-dawn lang's list
+    language_en = "//span[contains(text(),'Укр')]"   # Eng language button from the drop-dawn lang's list
+    language_ua = "//span[contains(text(),'Eng')]"   # Укр language button from the drop-dawn lang's list
 
     # Headers of information pages
     page_header_h2 = "//h2[@class='content__title']"
@@ -34,6 +38,7 @@ class Selectors:
     nick_name_filed = "nick"  # By field's name
     nick_name_success = "//span[@class='modala__ok']"
     nick_name_boarder_success = "//div[@id='registration']//input[@id='login']"
+    signup_h4_title = "//div[@id='registration']//h4[@class='modala__title']"
 
     # Login fields at the Login form
     login_field = "login"  # By field's name
@@ -42,6 +47,7 @@ class Selectors:
     # Cash page UAH
     paymega_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # PayMega chain button
     ecommpay_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # Ecommpay chain button
+    ecommpay_uah_cashin_button_2 = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][2]//button"  # Ecommpay chain button
     alfa_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][2]//button"  # Alfa Click button
     psb_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][3]//button"  # Prom Sv Bank chain button
     wm_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][4]//button"  # Web Money chain button
@@ -58,8 +64,8 @@ class Selectors:
                            neteller_uah_cashin_button, yandex_uah_cashin_button, privat_uah_cashin_button]
 
     # Cash fields at the inner frame
-    a = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][1]//div[@class='content_fields']"  # PayMega
-    b = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][2]//div[@class='content_fields']"  # Ecommpay
+    paymega_cash_field = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][1]//div[@class='content_fields']/input"  # PayMega
+    ecommpay_cash_field = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][2]//div[@class='content_fields']"  # Ecommpay
     c = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][3]//div[@class='content_fields']"
     d = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][4]//div[@class='content_fields']"
     e = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][5]//div[@class='content_fields']"
@@ -68,4 +74,11 @@ class Selectors:
     h = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][8]//div[@class='content_fields']"
     i = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][9]//div[@class='content_fields']"
     j = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][10]//div[@class='content_fields']"
-    cash_field_list = [a, b, c, d, e, f, g, h, i, j]
+    cash_field_list = [paymega_cash_field, ecommpay_cash_field, c, d, e, f, g, h, i, j]
+
+    # Cash inner fields
+    ecommpay_inner_cash_button = "//div[@class='pm_cash__table pm_cash__table_in']/div[5]//button[@type='submit']/span[@class='button__inner']"
+
+
+    # Event messages
+    event_message = "//div[@class='event_message']"
