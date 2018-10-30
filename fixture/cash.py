@@ -38,7 +38,7 @@ class Cash:
         driver.find_element_by_xpath(xpath).send_keys("400")
         driver.find_element_by_xpath("//div[@class='pm_cash__table pm_cash__table_in']/div[3]//form[@class='pm_cash__left']//span[@class='button__inner']").click()
 
-    def fill_ecommpay_fields(self,):
+    def fill_ecommpay_fields(self):
         driver = self.app.driver
         self.app.warning.wait_for_element_xpath(self.app.selectors.ecommpay_inner_cash_button)
         driver.find_element_by_xpath(self.app.selectors.ecommpay_inner_cash_button).click()
@@ -51,6 +51,10 @@ class Cash:
         driver.find_element_by_xpath("//input[@name='cvv']").send_keys("321")
         driver.find_element_by_xpath("//input[@type='submit']").click()
         time.sleep(3)
+
+
+
+
 
 
 

@@ -20,6 +20,11 @@ class WarningMessages:
         border = waitElement.value_of_css_property("border-bottom-color")
         return border
 
+    def get_text_content(self, xpath):
+        waitElement = self.wait_for_element_xpath(xpath)
+        text = waitElement.get_attribute("textContent")
+        return text
+
     def get_value(self, xpath):
         waitElement = self.wait_for_element_xpath(xpath)
         password = waitElement.get_attribute("value")

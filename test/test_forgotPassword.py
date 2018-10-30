@@ -1,8 +1,8 @@
 from random import randrange
-
-random = randrange(100000000)
 import time
 import pytest
+random = randrange(100000000)
+
 
 
 @pytest.allure.step("Forgot password with valid Email")

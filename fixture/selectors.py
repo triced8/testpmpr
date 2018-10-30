@@ -18,6 +18,8 @@ class Selectors:
     language_ru = "//span[contains(text(),'Рус')]"  # Rus language button from the drop-dawn lang's list
     language_en = "//span[contains(text(),'Укр')]"   # Eng language button from the drop-dawn lang's list
     language_ua = "//span[contains(text(),'Eng')]"   # Укр language button from the drop-dawn lang's list
+    balance = "//span[@id='balance']"
+    slot_button = "//a[@href='/ru/games']"
 
     # Headers of information pages
     page_header_h2 = "//h2[@class='content__title']"
@@ -47,7 +49,7 @@ class Selectors:
     # Cash page UAH
     paymega_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # PayMega chain button
     ecommpay_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # Ecommpay chain button
-    ecommpay_uah_cashin_button_2 = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][2]//button"  # Ecommpay chain button
+    ecommpay_uah_cashin_button_2 = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # Ecommpay chain button
     alfa_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][2]//button"  # Alfa Click button
     psb_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][3]//button"  # Prom Sv Bank chain button
     wm_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][4]//button"  # Web Money chain button
@@ -75,10 +77,11 @@ class Selectors:
     i = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][9]//div[@class='content_fields']"
     j = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__content'][10]//div[@class='content_fields']"
     cash_field_list = [paymega_cash_field, ecommpay_cash_field, c, d, e, f, g, h, i, j]
+    test_ec = "//div[@class='pm_cash__table pm_cash__table_in']/div[3]//form[@class='pm_cash__left']//button[@type='submit']/span[@class='button__inner']"
 
     # Cash inner fields
     ecommpay_inner_cash_button = "//div[@class='pm_cash__table pm_cash__table_in']/div[5]//button[@type='submit']/span[@class='button__inner']"
 
-
     # Event messages
     event_message = "//div[@class='event_message']"
+    close_message = "//div[@class='close_message websymbol']"

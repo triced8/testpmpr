@@ -34,14 +34,22 @@ def test_use_paymega(app):
 def test_use_ecommpay(app):
     with pytest.allure.step("Open Cash page with login"):
         app.pages.open_cash_page()
+    with pytest.allure.step("Get balance before cash in"):
+        before_balance = app.pages.get_user_balance()
     with pytest.allure.step("Open paymega inner frames for UAH"):
-        app.cash.open_inner_frame(xpath_cash=app.selectors.ecommpay_uah_cashin_button_2, xpath=app.selectors.ecommpay_cash_field) # ecommpay_cash_field check the button is displayed
+        app.cash.open_inner_frame(xpath_cash=app.selectors.ecommpay_uah_cashin_button_2, xpath=app.selectors.test_ec) # ecommpay_cash_field check the button is displayed
     with pytest.allure.step("Fill and send data at the ecommpay form"):
         app.cash.fill_ecommpay_fields()
     with pytest.allure.step("Return to main window"):
         app.driver.switch_to.default_content()
     with pytest.allure.step("Check event message"):
         assert app.warning.get_outer_text(app.selectors.event_message) == app.text.cash_in_event_message_ru
+    with pytest.allure.step("Close event message"):
+        app.pages.close_message()
+    with pytest.allure.step("Get balance after cash in"):
+        after_balance = app.pages.get_user_balance()
+    with pytest.allure.step("Check difference between balances"):
+        assert int(after_balance) - int(before_balance) == 100
     with pytest.allure.step("Logout from account"):
         app.session.logout()
 

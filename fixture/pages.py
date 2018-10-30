@@ -1,5 +1,6 @@
 from model.credLogin import LoginCred
 import time
+import re
 from selenium.webdriver.firefox.options import Options
 
 
@@ -53,3 +54,24 @@ class Pages:
             self.app.warning.wait_for_element_xpath(self.app.selectors.language_ru)
             driver.find_element_by_xpath(self.app.selectors.language_ru).click()
 
+    #  Close Web Socket message
+    def close_message(self):
+        driver = self.app.driver
+        driver.find_element_by_xpath(self.app.selectors.close_message).click()
+
+    def get_user_balance(self):
+        balance_string = self.app.warning.get_outer_text(self.app.selectors.balance)
+        template = re.compile('([0-9]{0,3}),?([0-9]{0,3}),?([0-9]{0,3}),?.([0-9]{2})')
+        match_obj = re.match(template, balance_string)
+
+        pre_result = ''.join(match_obj.groups()[:-1])
+        balance = '.'.join((pre_result, match_obj.groups()[-1:][0]))
+        print(balance)
+        return balance
+
+    def open_slots_page(self):
+        driver = self.app.driver
+        self.open_main_page()
+        driver.find_element_by_xpath(self.app.selectors.slot_button).click()
+        assert driver.current_url.endswith("/games")
+        assert driver.title == "games001"
