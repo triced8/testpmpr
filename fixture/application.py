@@ -35,8 +35,6 @@ class Application:
 
     def open_main_page_ru(self):
         driver = self.driver
-
-        #    return
         driver.get(self.selectors.site_ru)
 
     # Check that fixture is valid

@@ -50,7 +50,7 @@ class Selectors:
     # Cash page UAH
     paymega_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # PayMega chain button
     ecommpay_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # Ecommpay chain button
-    ecommpay_uah_cashin_button_2 = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][1]//button"  # Ecommpay chain button
+    ecommpay_uah_cashin_button_2 = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][2]//button"  # Ecommpay chain button
     alfa_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][2]//button"  # Alfa Click button
     psb_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][3]//button"  # Prom Sv Bank chain button
     wm_uah_cashin_button = "//div[@class='pm_cash__table pm_cash__table_in']//div[@class='pm_cash__table_col'][4]//button"  # Web Money chain button
@@ -89,3 +89,7 @@ class Selectors:
 
     # Footer
     footer_licence_info = "//div[@class='footer_licence_info']"
+    footer_terms_and_conditions = "//a[@href='/ru/termsandconditions']"
+    footer_privacy_policy = "//a[@href='/ru/privacypolicy']"
+    footer_antifraud = "//a[@href='/ru/antifraud']"
+    footer_contacts = "//a[@href='/ru/about/contacts']"

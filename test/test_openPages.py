@@ -49,6 +49,35 @@ def test_open_about(app):
         app.session.current_url(endswith="about")
 
 
+@pytest.allure.step("Open about page")
+def test_open_header_links(app):
+    with pytest.allure.step("Open main page"):
+        app.open_main_page_ru()
+    with pytest.allure.step("Change in to Ru local if it needed"):
+        app.pages.change_to_ru()
+    with pytest.allure.step("Open news page"):
+        app.pages.open_news_page()
+    with pytest.allure.step("Open news tutorial"):
+        app.pages.open_tutorial_page()
+    with pytest.allure.step("Open promo page"):
+        app.pages.open_promo_page()
+    with pytest.allure.step("Open about page"):
+        app.pages.open_about_page()
+
+
+@pytest.allure.step("Open footer links")
+def test_open_footer_links(app):
+    with pytest.allure.step("Open main page"):
+        app.open_main_page_ru()
+    with pytest.allure.step("Open 'terms and conditions' page"):
+        app.pages.open_terms_and_conditions_page()
+    with pytest.allure.step("Open 'privacy policy' page"):
+        app.pages.open_privacy_policy_page()
+    with pytest.allure.step("Open 'antifraud' page"):
+        app.pages.open_antifraud_page()
+    with pytest.allure.step("Open 'contacts' page"):
+        app.pages.open_contacts_page()
+
 """# Только на проде
 def test_open_payments(app):
     app.pages.openMainPage()

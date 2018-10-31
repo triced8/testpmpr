@@ -12,6 +12,10 @@ class TextRu:
     headerPromoRu = "ПРОМО АКЦИИ"
     headerAboutRu = "О НАС"
     headerPaymantsRu = "Как сделать депозит все варианты"
+    header_terms_and_conditions_ru = "ПРАВИЛА И УСЛОВИЯ"
+    header_privacy_policy_ru = "ЗАЩИТА ИНФОРМАЦИИ"
+    header_antifraud = "ANTIFRAUD"
+    header_contacts_ru = "О НАС"
 
     # Event message
     cash_in_event_message_ru = "Уважаемый игрок, ваш баланс пополнен на 100.00 UAH"

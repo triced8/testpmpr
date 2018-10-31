@@ -81,3 +81,56 @@ class Pages:
         print(licence_text, "LolOLoLo", self.app.text.footer_licence_text)
         assert licence_text == self.app.text.footer_licence_text
 
+    def open_news_page(self):
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_news).click()
+        assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == self.app.text.headerNewsRu
+        self.app.session.current_url(endswith="news")
+
+    def open_tutorial_page(self):
+        app = self.app
+        app.pages.open_main_page()
+        app.driver.find_element_by_xpath(app.selectors.header_menu_tutorial).click()
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerTutorialRu
+        app.session.current_url(endswith="tutorial")
+
+    def open_promo_page(self):
+        app = self.app
+        app.pages.open_main_page()
+        app.driver.find_element_by_xpath(app.selectors.header_menu_promo).click()
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerPromoRu
+        app.session.current_url(endswith="promo")
+
+    def open_about_page(self):
+        app = self.app
+        app.pages.open_main_page()
+        app.driver.find_element_by_xpath(app.selectors.header_menu_about).click()
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerAboutRu
+        app.session.current_url(endswith="about")
+
+    def open_terms_and_conditions_page(self):
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.footer_terms_and_conditions).click()
+        assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == self.app.text.header_terms_and_conditions_ru
+        self.app.session.current_url(endswith="termsandconditions")
+
+    def open_privacy_policy_page(self):
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.footer_privacy_policy).click()
+        assert self.app.warning.get_outer_text(
+            self.app.selectors.page_header_h2) == self.app.text.header_privacy_policy_ru
+        self.app.session.current_url(endswith="privacypolicy")
+
+    def open_antifraud_page(self):
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.footer_antifraud).click()
+        assert self.app.warning.get_outer_text(
+            self.app.selectors.page_header_h2) == self.app.text.header_antifraud
+        self.app.session.current_url(endswith="antifraud")
+
+    def open_contacts_page(self):
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.footer_contacts).click()
+        assert self.app.warning.get_outer_text(
+            self.app.selectors.page_header_h2) == self.app.text.headerAboutRu
+        self.app.session.current_url(endswith="/about/contacts")
