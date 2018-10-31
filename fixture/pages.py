@@ -75,3 +75,9 @@ class Pages:
         driver.find_element_by_xpath(self.app.selectors.slot_button).click()
         assert driver.current_url.endswith("/games")
         assert driver.title == "games001"
+
+    def footer_licence_info(self):
+        licence_text = self.app.warning.get_outer_text(self.app.selectors.footer_licence_info)
+        print(licence_text, "LolOLoLo", self.app.text.footer_licence_text)
+        assert licence_text == self.app.text.footer_licence_text
+

@@ -20,6 +20,7 @@ class Selectors:
     language_ua = "//span[contains(text(),'Eng')]"   # Укр language button from the drop-dawn lang's list
     balance = "//span[@id='balance']"
     slot_button = "//a[@href='/ru/games']"
+    poker_button = "//a[@class='info-list__item-value']"
 
     # Headers of information pages
     page_header_h2 = "//h2[@class='content__title']"
@@ -85,3 +86,6 @@ class Selectors:
     # Event messages
     event_message = "//div[@class='event_message']"
     close_message = "//div[@class='close_message websymbol']"
+
+    # Footer
+    footer_licence_info = "//div[@class='footer_licence_info']"
