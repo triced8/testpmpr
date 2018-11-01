@@ -106,7 +106,7 @@ def test_sign_up_password_see_password(app):
     with pytest.allure.step("Fill in password field"):
         app.driver.find_element_by_xpath("(//input[@name='password'])[4]").send_keys("TestTest12")
     with pytest.allure.step("Click on the 'see password' button"):
-        app.driver.find_element_by_xpath("//div[@id='registration']//span[@class='switch_pass']").click()
+        app.driver.find_element_by_xpath(app.selectors.see_password_button).click()
         time.sleep(0.5)
         assert app.warning.get_value(xpath=app.selectors.signup_password_field) == "TestTest12"
 

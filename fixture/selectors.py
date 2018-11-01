@@ -41,6 +41,7 @@ class Selectors:
     nick_name_filed = "nick"  # By field's name
     nick_name_success = "//span[@class='modala__ok']"
     nick_name_boarder_success = "//div[@id='registration']//input[@id='login']"
+    see_password_button = "//div[@id='registration']//span[@class='switch_pass']"
     signup_h4_title = "//div[@id='registration']//h4[@class='modala__title']"
 
     # Login fields at the Login form
