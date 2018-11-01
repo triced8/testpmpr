@@ -19,7 +19,7 @@ class TextRu:
 
     # Event message
     cash_in_event_message_ru = "Уважаемый игрок, ваш баланс пополнен на 100.00 UAH"
-
+    registration_event_message_ru = "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
     # Footer
     footer_licence_text = "Copyright © 2016-2018 PokerMatch. All rights reserved.\n\n " \
                           "www.pokermatch.com is managed and operated\n " \

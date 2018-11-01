@@ -23,7 +23,7 @@ def test_sign_up_happy_pass(app):
                                password="TestTest12", captcha="1111"))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
-            "//div[@class='event_message']") == "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
+            app.selectors.event_message) == app.text.registration_event_message_ru
 
 
 @pytest.allure.step("Signup with nick name number only")
@@ -40,7 +40,7 @@ def test_sign_up_nick_number_only(app):
                                password="TestTest12", captcha="1111"))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
-            "//div[@class='event_message']") == "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
+            app.selectors.event_message) == app.text.registration_event_message_ru
 
 
 @pytest.allure.step("Signup with password caps")
@@ -57,7 +57,7 @@ def test_sign_up_password_upper(app):
                                password=("TestTest12").upper(), captcha="1111"))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
-            "//div[@class='event_message']") == "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
+            app.selectors.event_message) == app.text.registration_event_message_ru
 
 
 @pytest.allure.step("Signup with password only number")
@@ -74,7 +74,7 @@ def test_sign_up_password_number(app):
                                password="123456789", captcha="1111"))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
-            "//div[@class='event_message']") == "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
+            app.selectors.event_message) == app.text.registration_event_message_ru
 
 
 @pytest.allure.step("Signup with password only special symbols")
@@ -91,7 +91,7 @@ def test_sign_up_password_special(app):
                                password='!@#$%^/\&*()~?|}"\'{:[]<>,.', captcha="1111"))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
-            "//div[@class='event_message']") == "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
+            app.selectors.event_message) == app.text.registration_event_message_ru
 
 
 @pytest.allure.step("See password button")
@@ -108,7 +108,7 @@ def test_sign_up_password_see_password(app):
     with pytest.allure.step("Click on the 'see password' button"):
         app.driver.find_element_by_xpath("//div[@id='registration']//span[@class='switch_pass']").click()
         time.sleep(0.5)
-        assert app.warning.get_value(xpath="(//input[@name='password'])[4]") == "TestTest12"
+        assert app.warning.get_value(xpath=app.selectors.signup_password_field) == "TestTest12"
 
 
 @pytest.allure.step("Close pop-up by outside click")
@@ -118,7 +118,7 @@ def test_close_outside(app):
     with pytest.allure.step("Click out side pop-up"):
         app.session.click_out_side()
     with pytest.allure.step("Assert that pup-up is closed"):
-        assert not app.session.element_is_display("//div[@id='registration']//h4[@class='modala__title']")
+        assert not app.session.element_is_display(app.selectors.signup_h4_title)
 
 
 """
