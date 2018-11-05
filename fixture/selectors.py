@@ -94,3 +94,10 @@ class Selectors:
     footer_privacy_policy = "//a[@href='/ru/privacypolicy']"
     footer_antifraud = "//a[@href='/ru/antifraud']"
     footer_contacts = "//a[@href='/ru/about/contacts']"
+
+    # Adminka
+    user_button = "//ul[@id='side-menu']/li[3]"
+    first_user = "//td[@class='h-break-word'][2]/a"
+    email_header_link = "//ul[@class='nav nav-pills']/li[11]"
+    registration_email = "//a[contains(text(),'REGISTRATION')]"
+    registration_link = "//p[5]/a"

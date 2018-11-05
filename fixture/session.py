@@ -36,6 +36,8 @@ class SessionHelper:
         # Click on the logout button
         driver.find_element_by_xpath(self.app.selectors.logout_button).click()
 
+
+
     # Fill fields at the login pop-up
     def fill_fields_see_password(self, group):
         driver = self.open_login_popup()

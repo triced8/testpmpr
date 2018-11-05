@@ -7,8 +7,6 @@ from random import randrange
 random = None
 
 
-
-
 @pytest.allure.step("Signup with happy pass")
 def test_sign_up_happy_pass(app):
     random = randrange(1000000000)
@@ -25,6 +23,27 @@ def test_sign_up_happy_pass(app):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.registration_event_message_ru
 
+
+@pytest.allure.step("Signup with happy pass and with approve by email link")
+def test_registration_with_approve(app):
+    random = randrange(1000000000)
+    with pytest.allure.step("Log out if user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            with pytest.allure.step("Fill in form by valid data"):
+                app.registration.sign_up_happy_pass(
+                    SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
+                               password="TestTest12", captcha="1111"))
+    with pytest.allure.step("Assert for text about email"):
+        assert app.warning.get_outer_text(
+            app.selectors.event_message) == app.text.registration_event_message_ru
+    with pytest.allure.step("Enter to admin and click to registration link"):
+        app.admin.registration_with_approve()
+    with pytest.allure.step("Assert that user is approved "):
+        assert app.warning.get_outer_text(
+            app.selectors.event_message) == app.text.approve_registration_message_ru
 
 @pytest.allure.step("Signup with nick name number only")
 def test_sign_up_nick_number_only(app):
