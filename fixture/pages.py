@@ -78,7 +78,7 @@ class Pages:
 
     def footer_licence_info(self):
         licence_text = self.app.warning.get_outer_text(self.app.selectors.footer_licence_info)
-        print(licence_text, "LolOLoLo", self.app.text.footer_licence_text)
+        print(licence_text, "LolOLoLo\n", self.app.text.footer_licence_text)
         assert licence_text == self.app.text.footer_licence_text
 
     def open_news_page(self):

@@ -22,9 +22,9 @@ class TextRu:
     registration_event_message_ru = "Вам было отправлено письмо для подтверждения регистрации, пожалуйста, подтвердите регистрацию в течение 24ч"
     approve_registration_message_ru = "Благодарим вас за регистрацию!"
     # Footer
-    footer_licence_text = "Copyright © 2016-2018 PokerMatch. All rights reserved.\n\n " \
-                          "www.pokermatch.com is managed and operated\n " \
-                          "by Inplace N.V., Heelsumstraat 51, E-Commerce Park, P.O. Box 422, Curaçao.\n " \
+    footer_licence_text = "Copyright © 2016-2018 PokerMatch. All rights reserved.\n\n" \
+                          "www.pokermatch.com is managed and operated\n" \
+                          "by Inplace N.V., Heelsumstraat 51, E-Commerce Park, P.O. Box 422, Curaçao.\n" \
                           "Gaming and wagering services are provided under the License No. 8048/JAZ2016-048. " \
                           "Payments processing is executed by Antrum LTD, Christodoulou Chatzipavlou, 199, 8th floor, " \
                           "flat/office 8A, 3936, Limassol, Cyprus."
