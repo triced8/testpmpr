@@ -2,7 +2,7 @@ from model.credLogin import LoginCred
 import time
 import re
 from selenium.webdriver.firefox.options import Options
-
+import pytest
 
 class Pages:
 
@@ -54,6 +54,24 @@ class Pages:
             self.app.warning.wait_for_element_xpath(self.app.selectors.language_ru)
             driver.find_element_by_xpath(self.app.selectors.language_ru).click()
 
+    def change_to_ua(self):
+        driver = self.app.driver
+        language = self.app.selectors.language
+        used_language = self.app.warning.get_outer_text(language)
+        if used_language == "РУС" or used_language == "ENG":
+            driver.find_element_by_xpath(self.app.selectors.language).click()
+            self.app.warning.wait_for_element_xpath(self.app.selectors.language_ua)
+            driver.find_element_by_xpath(self.app.selectors.language_ua).click()
+
+    def change_to_en(self):
+        driver = self.app.driver
+        language = self.app.selectors.language
+        used_language = self.app.warning.get_outer_text(language)
+        if used_language == "РУС" or used_language == "УКР":
+            driver.find_element_by_xpath(self.app.selectors.language).click()
+            self.app.warning.wait_for_element_xpath(self.app.selectors.language_en)
+            driver.find_element_by_xpath(self.app.selectors.language_en).click()
+
     #  Close Web Socket message
     def close_message(self):
         driver = self.app.driver
@@ -84,28 +102,28 @@ class Pages:
     def open_news_page(self):
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_news).click()
-        assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == self.app.text.headerNewsRu
+        assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == self.app.text.header_news_ru
         self.app.session.current_url(endswith="news")
 
     def open_tutorial_page(self):
         app = self.app
         app.pages.open_main_page()
         app.driver.find_element_by_xpath(app.selectors.header_menu_tutorial).click()
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerTutorialRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_tutorial_ru
         app.session.current_url(endswith="tutorial")
 
     def open_promo_page(self):
         app = self.app
         app.pages.open_main_page()
         app.driver.find_element_by_xpath(app.selectors.header_menu_promo).click()
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerPromoRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_promo_ru
         app.session.current_url(endswith="promo")
 
     def open_about_page(self):
         app = self.app
         app.pages.open_main_page()
         app.driver.find_element_by_xpath(app.selectors.header_menu_about).click()
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerAboutRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_about_ru
         app.session.current_url(endswith="about")
 
     def open_terms_and_conditions_page(self):
@@ -132,5 +150,104 @@ class Pages:
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.footer_contacts).click()
         assert self.app.warning.get_outer_text(
-            self.app.selectors.page_header_h2) == self.app.text.headerAboutRu
+            self.app.selectors.page_header_h2) == self.app.text.header_about_ru
         self.app.session.current_url(endswith="/about/contacts")
+
+    @pytest.allure.step("Open news page")
+    def check_news_page_local(self):
+        with pytest.allure.step("Create dict with texts"):
+            locale_switcher = dict(
+                ru=self.app.text.header_news_ru,
+                en=self.app.text.header_news_en,
+                ua=self.app.text.header_news_ua
+            )
+        with pytest.allure.step("Open main page"):
+            self.app.pages.open_main_page()
+        with pytest.allure.step("Open News page"):
+            self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_news).click()
+        with pytest.allure.step("Create cycle for check different language from dict"):
+            for k, v in locale_switcher.items():
+                locale_point = v
+                with pytest.allure.step("Change in to needed language"):
+                    if v == self.app.text.header_news_ru:
+                        self.change_to_ru()
+                        time.sleep(0.3)
+                    elif v == self.app.text.header_news_en:
+                        self.change_to_en()
+                        time.sleep(0.3)
+                    elif v == self.app.text.header_news_ua:
+                        self.change_to_ua()
+                        time.sleep(0.3)
+                with pytest.allure.step("Check that header in needed localization"):
+                    assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
+                with pytest.allure.step("Check that URL endswith"):
+                    self.app.session.current_url(endswith="news")
+
+    def check_tutorial_page_local(self):
+        locale_switcher = dict(
+            ru=self.app.text.header_tutorial_ru,
+            en=self.app.text.header_tutorial_en,
+            ua=self.app.text.header_tutorial_ua
+        )
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_tutorial).click()
+        for k, v in locale_switcher.items():
+            locale_point = v
+
+            if v == self.app.text.header_tutorial_ru:
+                self.change_to_ru()
+                time.sleep(0.3)
+            elif v == self.app.text.header_tutorial_en:
+                self.change_to_en()
+                time.sleep(0.3)
+            elif v == self.app.text.header_tutorial_ua:
+                self.change_to_ua()
+                time.sleep(0.3)
+            assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
+            self.app.session.current_url(endswith="tutorial")
+
+    def check_promo_page_local(self):
+        locale_switcher = dict(
+            ru=self.app.text.header_promo_ru,
+            en=self.app.text.header_promo_en,
+            ua=self.app.text.header_promo_ua
+        )
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_promo).click()
+        for k, v in locale_switcher.items():
+            locale_point = v
+
+            if v == self.app.text.header_promo_ru:
+                self.change_to_ru()
+                time.sleep(0.3)
+            elif v == self.app.text.header_promo_en:
+                self.change_to_en()
+                time.sleep(0.3)
+            elif v == self.app.text.header_promo_ua:
+                self.change_to_ua()
+                time.sleep(0.3)
+            assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
+            self.app.session.current_url(endswith="promo")
+
+    def check_about_page_local(self):
+        locale_switcher = dict(
+            ru=self.app.text.header_about_ru,
+            en=self.app.text.header_about_en,
+            ua=self.app.text.header_about_ua
+        )
+        self.app.pages.open_main_page()
+        self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_about).click()
+        for k, v in locale_switcher.items():
+            locale_point = v
+
+            if v == self.app.text.header_about_ru:
+                self.change_to_ru()
+                time.sleep(0.3)
+            elif v == self.app.text.header_about_en:
+                self.change_to_en()
+                time.sleep(0.3)
+            elif v == self.app.text.header_about_ua:
+                self.change_to_ua()
+                time.sleep(0.3)
+            assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
+            self.app.session.current_url(endswith="about")

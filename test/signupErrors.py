@@ -12,7 +12,7 @@ def test_sign_up_empty(app):
             app.open_main_page_ru()
             app.session.logout()
         else:
-            app.registration.sign_up(SignupCred(email="", username="", password="", captcha=""))
+            app.registration.sign_up(SignupCred(email="", username="", password="", captcha="", promo_code=""))
     with pytest.allure.step("Turn off PP captcha"):
         app.driver.find_element_by_xpath(
             "//div[@id='registration']//div[@class='modala__agreement_wrapper']//span[@class='checkbox__box']").click()
@@ -54,7 +54,7 @@ def test_sign_up_empty_pp_checkbox(app):
         else:
             app.registration.sign_up(
                 SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                           password="TestTest12", captcha="1111"))
+                           password="TestTest12", captcha="1111", promo_code=""))
     # Turn off PP check box
     app.driver.find_element_by_xpath(
         "//div[@id='registration']//div[@class='modala__agreement_wrapper']//span[@class='checkbox__box']").click()
@@ -76,7 +76,7 @@ def test_sign_up_captcha(app):
         else:
             app.registration.sign_up(
                 SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                           password="TestTest12", captcha=""))
+                           password="TestTest12", captcha="", promo_code=""))
     # Error message for captcha field
     with pytest.allure.step("Check empty captcha field error"):
         assert app.warning.get_outer_text(
@@ -95,7 +95,7 @@ def test_signup_with_exist_email(app):
         else:
             app.registration.sign_up(
                 SignupCred(email="testpm8+3232@gmail.com", username="triced" + str(random), password="TestTest12",
-                           captcha="1111"))
+                           captcha="1111", promo_code=""))
             time.sleep(0.1)
     # Error message for email field
     with pytest.allure.step("Error for exist email near email field"):
@@ -117,7 +117,7 @@ def test_sign_up_password_wrong_captcha(app):
             app.registration.sign_up(
                 SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
                            password="TestTest12",
-                           captcha="1234"))
+                           captcha="1234", promo_code=""))
     # Error message for captcha field
     with pytest.allure.step("Error with wrong captcha for captcha field"):
         assert app.warning.get_outer_text(
@@ -136,7 +136,7 @@ def test_signup_exist_nick(app):
         else:
             app.registration.sign_up(
                 SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="tricedu", password="TestTest12",
-                           captcha="1111"))
+                           captcha="1111", promo_code=""))
     # Error message for NickName field
     with pytest.allure.step("Error with exist nickname for nickname field"):
         assert app.warning.get_outer_text(
@@ -156,7 +156,7 @@ def test_sign_up_nick_with_special(app):
         else:
             app.registration.sign_up(
                 SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced+" + str(random),
-                           password="TestTest12", captcha="1111"))
+                           password="TestTest12", captcha="1111", promo_code=""))
     # Error message for NickName field
     with pytest.allure.step("Error with incorrect nickname for nickname field"):
         assert app.warning.get_outer_text(

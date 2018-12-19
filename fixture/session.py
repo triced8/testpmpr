@@ -29,6 +29,7 @@ class SessionHelper:
         driver.find_element_by_xpath(self.app.selectors.login_password_field).send_keys(group.password)
         # Click on the login button
         driver.find_element_by_xpath(self.app.selectors.login_button_form).click()
+        time.sleep(1)
         self.app.pages.change_to_ru()
 
     def logout(self):

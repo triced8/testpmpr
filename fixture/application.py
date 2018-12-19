@@ -6,8 +6,9 @@ from fixture.registration import SignUpHelper
 from fixture.admin import AdminHelper
 from fixture.warningMessages import WarningMessages
 from fixture.cash import Cash
-from fixture.textru import TextRu
+from fixture.text import Text
 from fixture.selectors import Selectors
+
 
 class Application:
 
@@ -30,7 +31,7 @@ class Application:
         self.warning = WarningMessages(self)
         self.pages = Pages(self)
         self.cash = Cash(self)
-        self.text = TextRu(self)
+        self.text = Text(self)
         self.selectors = Selectors(self)
 
     def open_main_page_ru(self):

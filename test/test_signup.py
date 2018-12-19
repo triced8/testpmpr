@@ -7,23 +7,6 @@ from random import randrange
 random = None
 
 
-@pytest.allure.step("Signup with happy pass")
-def test_sign_up_happy_pass(app):
-    random = randrange(1000000000)
-    with pytest.allure.step("Log out if user is logged"):
-        if app.session.user_logged():
-            app.open_main_page_ru()
-            app.session.logout()
-        else:
-            with pytest.allure.step("Fill in form by valid data"):
-                app.registration.sign_up_happy_pass(
-                    SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                               password="TestTest12", captcha="1111"))
-    with pytest.allure.step("Assert for text about email"):
-        assert app.warning.get_outer_text(
-            app.selectors.event_message) == app.text.registration_event_message_ru
-
-
 @pytest.allure.step("Signup with happy pass and with approve by email link")
 def test_registration_with_approve(app):
     random = randrange(1000000000)
@@ -35,7 +18,7 @@ def test_registration_with_approve(app):
             with pytest.allure.step("Fill in form by valid data"):
                 app.registration.sign_up_happy_pass(
                     SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                               password="TestTest12", captcha="1111"))
+                               password="TestTest12", captcha="1111", promo_code=""))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.registration_event_message_ru
@@ -44,6 +27,7 @@ def test_registration_with_approve(app):
     with pytest.allure.step("Assert that user is approved "):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.approve_registration_message_ru
+
 
 @pytest.allure.step("Signup with nick name number only")
 def test_sign_up_nick_number_only(app):
@@ -56,7 +40,7 @@ def test_sign_up_nick_number_only(app):
             with pytest.allure.step("Signup with nick name number only"):
                 app.registration.sign_up_happy_pass(
                     SignupCred(email="testpm8+" + str(random) + "@gmail.com", username=str(random),
-                               password="TestTest12", captcha="1111"))
+                               password="TestTest12", captcha="1111", promo_code=""))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.registration_event_message_ru
@@ -73,7 +57,7 @@ def test_sign_up_password_upper(app):
             with pytest.allure.step("Signup with password caps"):
                 app.registration.sign_up_happy_pass(
                     SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                               password=("TestTest12").upper(), captcha="1111"))
+                               password=("TestTest12").upper(), captcha="1111", promo_code=""))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.registration_event_message_ru
@@ -90,7 +74,7 @@ def test_sign_up_password_number(app):
             with pytest.allure.step("Signup with password only number"):
                 app.registration.sign_up_happy_pass(
                     SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                               password="123456789", captcha="1111"))
+                               password="123456789", captcha="1111", promo_code=""))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.registration_event_message_ru
@@ -107,7 +91,7 @@ def test_sign_up_password_special(app):
             with pytest.allure.step("Signup with password only special symbols"):
                 app.registration.sign_up_happy_pass(
                     SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
-                               password='!@#$%^/\&*()~?|}"\'{:[]<>,.', captcha="1111"))
+                               password='!@#$%^/\&*()~?|}"\'{:[]<>,.', captcha="1111", promo_code=""))
     with pytest.allure.step("Assert for text about email"):
         assert app.warning.get_outer_text(
             app.selectors.event_message) == app.text.registration_event_message_ru
@@ -131,6 +115,31 @@ def test_sign_up_password_see_password(app):
 
 
 @pytest.allure.step("Close pop-up by outside click")
+def test_sign_up_with_promo(app):
+    random = randrange(1000000000)
+    with pytest.allure.step("Log out if user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            with pytest.allure.step("Signup with password only special symbols"):
+                app.registration.sign_up_happy_pass(
+                    SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
+                               password="TestTest12", promo_code="testdd", captcha="1111"))
+        with pytest.allure.step("Assert for text about email"):
+            assert app.warning.get_outer_text(
+                app.selectors.event_message) == app.text.registration_event_message_ru
+        with pytest.allure.step("Enter to admin and click to registration link"):
+            app.admin.registration_with_approve()
+        with pytest.allure.step("Assert that user is approved "):
+            assert app.warning.get_outer_text(
+                app.selectors.event_message) == app.text.approve_registration_message_ru
+        with pytest.allure.step("Assert that verify pop-up is opened"):
+            assert app.warning.get_outer_text(app.selectors.h4_promo_pop_up) == app.text.h4_promo_title_ru
+            assert app.warning.get_outer_text(app.selectors.text_promo_pop_up) == app.text.text_promo_pop_up
+
+
+@pytest.allure.step("Close pop-up by outside click")
 def test_close_outside(app):
     with pytest.allure.step("Open 'sign up' pop-up"):
         app.registration.open_signup_popup()
@@ -141,6 +150,23 @@ def test_close_outside(app):
 
 
 """
+@pytest.allure.step("Signup with happy pass")
+def test_sign_up_happy_pass(app):
+    random = randrange(1000000000)
+    with pytest.allure.step("Log out if user is logged"):
+        if app.session.user_logged():
+            app.open_main_page_ru()
+            app.session.logout()
+        else:
+            with pytest.allure.step("Fill in form by valid data"):
+                app.registration.sign_up_happy_pass(
+                    SignupCred(email="testpm8+" + str(random) + "@gmail.com", username="triced" + str(random),
+                               password="TestTest12", captcha="1111", promo_code=""))
+    with pytest.allure.step("Assert for text about email"):
+        assert app.warning.get_outer_text(
+            app.selectors.event_message) == app.text.registration_event_message_ru
+
+
 def test_sign_up(app):
     random = randrange(1000000000)
     if app.session.userLogged():

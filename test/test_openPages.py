@@ -8,7 +8,7 @@ def test_open_news(app):
     with pytest.allure.step("Click on the 'news' link at the header menu"):
         app.driver.find_element_by_xpath(app.selectors.header_menu_news).click()
     with pytest.allure.step("Assert for name of page"):
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerNewsRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_news_ru
     with pytest.allure.step("Assert for endswith URL"):
         app.session.current_url(endswith="news")
 
@@ -20,7 +20,7 @@ def test_open_tutorial(app):
     with pytest.allure.step("Click on the 'tutorial' link at the header menu"):
         app.driver.find_element_by_xpath(app.selectors.header_menu_tutorial).click()
     with pytest.allure.step("Assert for name of page"):
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerTutorialRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_tutorial_ru
     with pytest.allure.step("Assert for endswith URL"):
         app.session.current_url(endswith="tutorial")
 
@@ -32,7 +32,7 @@ def test_open_promo(app):
     with pytest.allure.step("Click on the 'promo' link at the header menu"):
         app.driver.find_element_by_xpath(app.selectors.header_menu_promo).click()
     with pytest.allure.step("Assert for name of page"):
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerPromoRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_promo_ru
     with pytest.allure.step("Assert for endswith URL"):
         app.session.current_url(endswith="promo")
 
@@ -44,7 +44,7 @@ def test_open_about(app):
     with pytest.allure.step("Click on the 'about' link at the header menu"):
         app.driver.find_element_by_xpath(app.selectors.header_menu_about).click()
     with pytest.allure.step("Assert for name of page"):
-        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.headerAboutRu
+        assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_about_ru
     with pytest.allure.step("Assert for endswith URL"):
         app.session.current_url(endswith="about")
 
@@ -57,7 +57,7 @@ def test_open_header_links(app):
         app.pages.change_to_ru()
     with pytest.allure.step("Open news page"):
         app.pages.open_news_page()
-    with pytest.allure.step("Open news tutorial"):
+    with pytest.allure.step("Open tutorial page"):
         app.pages.open_tutorial_page()
     with pytest.allure.step("Open promo page"):
         app.pages.open_promo_page()
@@ -77,6 +77,18 @@ def test_open_footer_links(app):
         app.pages.open_antifraud_page()
     with pytest.allure.step("Open 'contacts' page"):
         app.pages.open_contacts_page()
+
+
+
+def test_open_news1(app):
+    with pytest.allure.step("Check News Page"):
+        app.pages.check_news_page_local()
+    with pytest.allure.step("Check Tutorial Page"):
+        app.pages.check_tutorial_page_local()
+    with pytest.allure.step("Open Promo page"):
+        app.pages.check_promo_page_local()
+    with pytest.allure.step("Open About page"):
+        app.pages.check_about_page_local()
 
 """# Только на проде
 def test_open_payments(app):

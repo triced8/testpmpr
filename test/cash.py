@@ -5,7 +5,6 @@ import pytest
 
 random = randrange(100000000)
 
-
 @pytest.allure.step("Open inner frame at the cash page")
 def test_open_inner_frames(app):
     with pytest.allure.step("Open Cash page with login"):

@@ -21,6 +21,7 @@ class SignUpHelper:
         driver.find_element_by_name(self.app.selectors.nick_name_filed).send_keys(group.username)
         driver.find_element_by_xpath(self.app.selectors.signup_password_field).send_keys(group.password)
         driver.find_element_by_xpath(self.app.selectors.captcha_field).send_keys(group.captcha)
+        #driver.find_element_by_xpath(self.app.selectors.promocode).send_keys(group.promo_code)
         # Click on the Registration button
 
         driver.find_element_by_xpath("//div[@id='registration']/div/div/div[2]/form/button/div").click()
@@ -36,6 +37,7 @@ class SignUpHelper:
         assert self.app.warning.get_outer_text(self.app.selectors.nick_name_success) == "Этот логин доступен"
         assert self.app.warning.get_border_color(self.app.selectors.nick_name_boarder_success) == "rgba(0, 128, 0, 1)"
         # Click on the Registration button
+        driver.find_element_by_xpath(self.app.selectors.promocode).send_keys(group.promo_code)
         driver.find_element_by_xpath(self.app.selectors.signup_button_form).click()
 
     def clear_cache(self):

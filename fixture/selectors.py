@@ -16,8 +16,8 @@ class Selectors:
     header_menu_payments = "//a[@class='main_menu_element payments  ']"  # Payments/Платежи
     language = "//div[@id = 'languages']"  # language button
     language_ru = "//span[contains(text(),'Рус')]"  # Rus language button from the drop-dawn lang's list
-    language_en = "//span[contains(text(),'Укр')]"   # Eng language button from the drop-dawn lang's list
-    language_ua = "//span[contains(text(),'Eng')]"   # Укр language button from the drop-dawn lang's list
+    language_en = "//span[contains(text(),'Eng')]"   # Eng language button from the drop-dawn lang's list
+    language_ua = "//span[contains(text(),'Укр')]"   # Укр language button from the drop-dawn lang's listEng
     balance = "//span[@id='balance']"
     slot_button = "//a[@href='/ru/games']"
     poker_button = "//a[@class='info-list__item-value']"
@@ -43,6 +43,11 @@ class Selectors:
     nick_name_boarder_success = "//div[@id='registration']//input[@id='login']"
     see_password_button = "//div[@id='registration']//span[@class='switch_pass']"
     signup_h4_title = "//div[@id='registration']//h4[@class='modala__title']"
+    promocode = "//input[@name='promo_code']"
+
+    # Promo
+    h4_promo_pop_up = "//h4"
+    text_promo_pop_up = "//form[@action='/phone/verification/']/p"
 
     # Login fields at the Login form
     login_field = "login"  # By field's name
