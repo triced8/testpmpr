@@ -4,6 +4,7 @@ import re
 from selenium.webdriver.firefox.options import Options
 import pytest
 
+
 class Pages:
 
     def __init__(self, app):
@@ -20,8 +21,6 @@ class Pages:
 
     def open_cash_page(self):
         driver = self.app.driver
-        self.open_main_page()
-        self.app.session.login(LoginCred(username="triced ", password="TestTest12"))
         time.sleep(1)
         driver.find_element_by_xpath(self.app.selectors.cash_button).click()
         assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == "ПОПОЛНИТЬ"
@@ -42,8 +41,26 @@ class Pages:
         options.set_preference("browser.helperApps.neverAsk.saveToDisk", "/Users/d.demchenko/Desktop/blabla.dmg")
         time.sleep(20)
 
+    def fill_input(self, xpath, data):
+        driver = self.app.driver
+        driver.find_element_by_xpath(xpath).send_keys(data)
+
+    def switch_to_new_tab(self):
+        driver = self.app.driver
+        window_after = driver.window_handles[1]
+        driver.switch_to_window(window_after)
+
+    def switch_to_first_tab(self):
+        driver = self.app.driver
+        window_before = driver.window_handles[0]
+        driver.switch_to_window(window_before)
+
     def event_message(self, xpath):
         driver = self.app.driver
+
+    def current_url_start(self, startswith):
+        driver = self.app.driver
+        assert driver.current_url.startswith(startswith)
 
     def change_to_ru(self):
         driver = self.app.driver
@@ -91,7 +108,7 @@ class Pages:
         driver = self.app.driver
         self.open_main_page()
         driver.find_element_by_xpath(self.app.selectors.slot_button).click()
-        assert driver.current_url.endswith("/games")
+        assert driver.current_url_end.endswith("/games")
         assert driver.title == "games001"
 
     def footer_licence_info(self):
@@ -103,55 +120,56 @@ class Pages:
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.header_menu_news).click()
         assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == self.app.text.header_news_ru
-        self.app.session.current_url(endswith="news")
+        self.app.session.current_url_end(endswith="news")
 
     def open_tutorial_page(self):
         app = self.app
         app.pages.open_main_page()
         app.driver.find_element_by_xpath(app.selectors.header_menu_tutorial).click()
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_tutorial_ru
-        app.session.current_url(endswith="tutorial")
+        app.session.current_url_end(endswith="tutorial")
 
     def open_promo_page(self):
         app = self.app
         app.pages.open_main_page()
         app.driver.find_element_by_xpath(app.selectors.header_menu_promo).click()
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_promo_ru
-        app.session.current_url(endswith="promo")
+        app.session.current_url_end(endswith="promo")
 
     def open_about_page(self):
         app = self.app
         app.pages.open_main_page()
         app.driver.find_element_by_xpath(app.selectors.header_menu_about).click()
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_about_ru
-        app.session.current_url(endswith="about")
+        app.session.current_url_end(endswith="about")
 
     def open_terms_and_conditions_page(self):
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.footer_terms_and_conditions).click()
-        assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == self.app.text.header_terms_and_conditions_ru
-        self.app.session.current_url(endswith="termsandconditions")
+        assert self.app.warning.get_outer_text(
+            self.app.selectors.page_header_h2) == self.app.text.header_terms_and_conditions_ru
+        self.app.session.current_url_end(endswith="termsandconditions")
 
     def open_privacy_policy_page(self):
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.footer_privacy_policy).click()
         assert self.app.warning.get_outer_text(
             self.app.selectors.page_header_h2) == self.app.text.header_privacy_policy_ru
-        self.app.session.current_url(endswith="privacypolicy")
+        self.app.session.current_url_end(endswith="privacypolicy")
 
     def open_antifraud_page(self):
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.footer_antifraud).click()
         assert self.app.warning.get_outer_text(
             self.app.selectors.page_header_h2) == self.app.text.header_antifraud
-        self.app.session.current_url(endswith="antifraud")
+        self.app.session.current_url_end(endswith="antifraud")
 
     def open_contacts_page(self):
         self.app.pages.open_main_page()
         self.app.driver.find_element_by_xpath(self.app.selectors.footer_contacts).click()
         assert self.app.warning.get_outer_text(
             self.app.selectors.page_header_h2) == self.app.text.header_about_ru
-        self.app.session.current_url(endswith="/about/contacts")
+        self.app.session.current_url_end(endswith="/about/contacts")
 
     @pytest.allure.step("Open news page")
     def check_news_page_local(self):
@@ -181,7 +199,7 @@ class Pages:
                 with pytest.allure.step("Check that header in needed localization"):
                     assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
                 with pytest.allure.step("Check that URL endswith"):
-                    self.app.session.current_url(endswith="news")
+                    self.app.session.current_url_end(endswith="news")
 
     def check_tutorial_page_local(self):
         locale_switcher = dict(
@@ -204,7 +222,7 @@ class Pages:
                 self.change_to_ua()
                 time.sleep(0.3)
             assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
-            self.app.session.current_url(endswith="tutorial")
+            self.app.session.current_url_end(endswith="tutorial")
 
     def check_promo_page_local(self):
         locale_switcher = dict(
@@ -227,7 +245,7 @@ class Pages:
                 self.change_to_ua()
                 time.sleep(0.3)
             assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
-            self.app.session.current_url(endswith="promo")
+            self.app.session.current_url_end(endswith="promo")
 
     def check_about_page_local(self):
         locale_switcher = dict(
@@ -250,4 +268,6 @@ class Pages:
                 self.change_to_ua()
                 time.sleep(0.3)
             assert self.app.warning.get_outer_text(self.app.selectors.page_header_h2) == locale_point
-            self.app.session.current_url(endswith="about")
+            self.app.session.current_url_end(endswith="about")
+
+

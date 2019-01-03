@@ -2,9 +2,12 @@ from random import randrange
 import time
 from model.credLogin import LoginCred
 import pytest
+from selenium.common.exceptions import NoSuchElementException
+from crontab import CronTab
+
 
 random = randrange(100000000)
-
+"""
 @pytest.allure.step("Open inner frame at the cash page")
 def test_open_inner_frames(app):
     with pytest.allure.step("Open Cash page with login"):
@@ -51,6 +54,169 @@ def test_use_ecommpay(app):
         assert int(after_balance) - int(before_balance) == 100
     with pytest.allure.step("Logout from account"):
         app.session.logout()
+"""
+
+
+
+
+
+@pytest.allure.step("")
+def test_open_privat(app):
+    app.pages.open_main_page()
+    #time.sleep(6)
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    app.cash.open_privat_inner_frame()
+    time.sleep(1)
+    app.cash.open_privat_page()
+    try:
+        app.pages.current_url_start(startswith="https://www.privat24.ua")
+    except NoSuchElementException as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.pages.open_main_page()
+pwd
+
+def test_open_dep_web_money(app):
+    app.pages.open_main_page()
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    time.sleep(1)
+    app.cash.open_web_money_inner_frame()
+    time.sleep(1)
+    app.cash.open_web_money_frame()
+    try:
+        assert app.session.element_is_display("//input[@name='choose_auth']")
+    except AssertionError as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.switch_to.default_content()
+
+
+def test_open_dep_qiwi(app):
+    app.pages.open_main_page()
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    app.cash.open_qiwi_inner_frame()
+    app.pages.fill_input(xpath="//div[@class='pm_cash__table pm_cash__table_in']//input[@name='phone']",
+                         data="380993694333")
+    app.cash.open_qiwi_frame()
+    try:
+        app.session.element_is_displayed("//div[@id='InvoiceInfoView-Amount']")
+    except AssertionError as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.switch_to.default_content()
+
+
+def test_open_dep_skrill(app):
+    app.pages.open_main_page()
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    app.cash.open_skrill_inner_frame()
+    time.sleep(1)
+    app.cash.open_skrill_frame()
+    try:
+        assert app.session.element_is_display("//div[@class='skrill-headline']")
+    except AssertionError as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.switch_to.default_content()
+
+
+def test_open_dep_neteller(app):
+    app.pages.open_main_page()
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    app.cash.open_neteller_inner_frame()
+    app.pages.fill_input(xpath="//input[@name='net_account']", data="342534524352")
+    time.sleep(1)
+    app.cash.open_neteller_frame()
+    try:
+        app.session.element_is_displayed("//td[@class='sum']")
+    except AssertionError as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.switch_to.default_content()
+        app.pages.open_cash_page()
+
+
+def test_open_dep_adv(app):
+    app.pages.open_main_page()
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    app.cash.open_adv_inner_frame()
+    time.sleep(1)
+    app.cash.open_adv_page()
+    time.sleep(1)
+    try:
+        app.pages.current_url_start(startswith="https://wallet.advcash.com/sci/login.jsf")
+    except NoSuchElementException as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.close()
+        app.pages.switch_to_first_tab()
+
+
+def test_open_dep_kiev_star(app):
+    app.pages.open_main_page()
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+        app.pages.open_main_page()
+    app.pages.open_cash_page()
+    app.cash.open_kiev_star_page()
+    try:
+        app.pages.current_url_start(startswith="https://money.kyivstar.ua/ru/service/view/pokermatch")
+    except NoSuchElementException as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.close()
+        app.pages.switch_to_first_tab()
+    time.sleep(1)
+
+
+def test_open_dep_life(app):
+    app.pages.open_main_page()
+    # time.sleep(7)
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+        app.pages.open_main_page()
+    app.pages.open_cash_page()
+    app.cash.open_life_page()
+    time.sleep(2)
+    try:
+        app.pages.current_url_start(startswith="https://paycell.lifecell.ua/")
+    except NoSuchElementException as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.close()
+        app.pages.switch_to_first_tab()
+
+
+def test_open_dep_yad(app):
+    app.pages.open_main_page()
+    #time.sleep(7)
+    if app.session.check_exists_by_xpath(xpath="//div[@class='head__col']/a[@href='#registration']"):
+        app.session.login(LoginCred(username="triced", password="TestTest12"))
+    app.pages.open_cash_page()
+    app.cash.open_yad_inner_frame()
+    time.sleep(1)
+    app.cash.open_yad_page()
+    try:
+        app.session.element_is_display("//h1[@class='title']")
+        app.pages.current_url_start(startswith="https://money.yandex.ru/payments/internal/confirmation?orderId")
+    except AssertionError as e:
+        print(f"Error: {e.msg}")
+    finally:
+        app.driver.close()
+        app.pages.switch_to_first_tab()
+    time.sleep(4)
 
 
 """
@@ -130,4 +296,3 @@ def test_open_game_client(app):
         app.driver.switch_to_window(app.driver.window_handles[0])
     with pytest.allure.step("Logout from user account"):
         app.session.logout() """
-

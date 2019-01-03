@@ -10,6 +10,7 @@ from fixture.text import Text
 from fixture.selectors import Selectors
 
 
+
 class Application:
 
     def __init__(self, browser):

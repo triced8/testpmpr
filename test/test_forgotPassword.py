@@ -17,7 +17,7 @@ def test_valid_email(app):
         app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
     time.sleep(1)
     with pytest.allure.step("Check current URL after sending email"):
-        app.session.current_url("/mailed/")
+        app.session.current_url_end("/mailed/")
     with pytest.allure.step("Check text after sending email"):
         assert app.warning.get_outer_text(
             "//h2[@class='main_title']") == "Мы отправили Вам ссылку для авторизации. Вы сможете сменить пароль в настройках профиля"
@@ -35,7 +35,7 @@ def test_email_upper(app):
         app.driver.find_element_by_xpath("//button[@id='passwordreminder']").click()
     time.sleep(0.1)
     with pytest.allure.step("Check current URL after sending email"):
-        app.session.current_url("/confirmation/")
+        app.session.current_url_end("/confirmation/")
     with pytest.allure.step("Check warning message"):
         assert app.warning.get_outer_text("//h2[@class='main_title']") == "Пожалуйста, проверьте Ваш e-mail ящик"
 

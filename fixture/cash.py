@@ -52,6 +52,123 @@ class Cash:
         driver.find_element_by_xpath("//input[@type='submit']").click()
         time.sleep(3)
 
+    def open_privat_inner_frame(self):
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[4].click()
+
+    def open_privat_page(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 300);")
+        buttons_list = self.get_list_of_dep_button()
+        time.sleep(0.5)
+        buttons_list[5].click()
+        time.sleep(7)
+
+
+    def open_web_money_inner_frame(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 500);")
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[6].click()
+
+    def open_web_money_frame(self):
+        driver = self.app.driver
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[7].click()
+        self.app.pages.frame_switch("//div[@class='pm_cash__content'][4]//iframe")
+        time.sleep(5)
+
+
+
+    def open_qiwi_inner_frame(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 500);")
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[8].click()
+
+    def open_qiwi_frame(self):
+        driver = self.app.driver
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[9].click()
+        self.app.pages.frame_switch("//div[@class='pm_cash__content'][5]//iframe")
+        time.sleep(7)
+
+    def open_skrill_inner_frame(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 500);")
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[10].click()
+
+    def open_skrill_frame(self):
+        driver = self.app.driver
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[11].click()
+        time.sleep(5)
+        self.app.pages.frame_switch("//div[@class='pm_cash__content'][6]//iframe")
+
+    def open_neteller_inner_frame(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 500);")
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[12].click()
+
+    def open_neteller_frame(self):
+        driver = self.app.driver
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[13].click()
+        time.sleep(5)
+        self.app.pages.frame_switch("//div[@class='pm_cash__content'][7]//iframe")
+
+    def open_yad_inner_frame(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 600);")
+        buttons_list = self.get_list_of_dep_button()
+        buttons_list[14].click()
+
+    def open_yad_page(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 600);")
+        buttons_list = self.get_list_of_dep_button()
+        time.sleep(0.5)
+        buttons_list[15].click()
+        time.sleep(1)
+        self.app.pages.switch_to_new_tab()
+
+    def open_adv_inner_frame(self):
+        driver = self.app.driver
+        buttons_list = self.get_list_of_dep_button()
+        driver.execute_script("window.scrollTo(0, 600);")
+        buttons_list[16].click()
+
+    def open_adv_page(self):
+        driver = self.app.driver
+        buttons_list = self.get_list_of_dep_button()
+        time.sleep(0.5)
+        buttons_list[17].click()
+        time.sleep(5)
+        self.app.pages.switch_to_new_tab()
+
+    def open_kiev_star_page(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 600);")
+        driver.find_element_by_xpath("//a[@href='https://money.kyivstar.ua/ru/service/view/pokermatch']").click()
+        time.sleep(5)
+        self.app.pages.switch_to_new_tab()
+
+    def open_life_page(self):
+        driver = self.app.driver
+        driver.execute_script("window.scrollTo(0, 600);")
+        driver.find_element_by_xpath("//a[@href='https://paycell.lifecell.ua/category-onlinetopup/pk-match']").click()
+        time.sleep(5)
+        self.app.pages.switch_to_new_tab()
+
+    def get_list_of_dep_button(self):
+        driver = self.app.driver
+        dep_buttons_dep = driver.find_elements_by_xpath("//div[@class='pm_cash__table pm_cash__table_in']//button[child::span[@class='button__inner']]")
+        dep_list = []
+        for button in dep_buttons_dep:
+            dep_list.append(button)
+        return dep_list
 
 
 

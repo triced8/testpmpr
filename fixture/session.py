@@ -21,7 +21,7 @@ class SessionHelper:
 
     def login(self, group):
         driver = self.open_login_popup()
-        self.current_url(endswith="#login")
+        self.current_url_end(endswith="#login")
         # Fill in fields
         driver.find_element_by_name(self.app.selectors.login_field).clear()
         driver.find_element_by_name(self.app.selectors.login_field).send_keys(group.username)
@@ -42,7 +42,7 @@ class SessionHelper:
     # Fill fields at the login pop-up
     def fill_fields_see_password(self, group):
         driver = self.open_login_popup()
-        self.current_url(endswith="#login")
+        self.current_url_end(endswith="#login")
         # Fill in fields
         driver.find_element_by_name("login").clear()
         driver.find_element_by_name("login").send_keys(group.username)
@@ -85,7 +85,7 @@ class SessionHelper:
             return False
         return True
 
-    def current_url(self, endswith):
+    def current_url_end(self, endswith):
         driver = self.app.driver
         assert driver.current_url.endswith(endswith)
 
@@ -118,5 +118,11 @@ class SessionHelper:
 
     def element_is_display(self, xpath):
         driver = self.app.driver
+        element = driver.find_element_by_xpath(xpath)
+        return element.is_displayed()
+
+    def element_is_displayed(self, xpath):
+        driver = self.app.driver
+        assert driver.find_element_by_xpath(xpath)
         element = driver.find_element_by_xpath(xpath)
         return element.is_displayed()

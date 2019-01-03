@@ -10,7 +10,7 @@ def test_open_news(app):
     with pytest.allure.step("Assert for name of page"):
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_news_ru
     with pytest.allure.step("Assert for endswith URL"):
-        app.session.current_url(endswith="news")
+        app.session.current_url_end(endswith="news")
 
 
 @pytest.allure.step("Open tutorial page")
@@ -22,7 +22,7 @@ def test_open_tutorial(app):
     with pytest.allure.step("Assert for name of page"):
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_tutorial_ru
     with pytest.allure.step("Assert for endswith URL"):
-        app.session.current_url(endswith="tutorial")
+        app.session.current_url_end(endswith="tutorial")
 
 
 @pytest.allure.step("Open promo page")
@@ -34,7 +34,7 @@ def test_open_promo(app):
     with pytest.allure.step("Assert for name of page"):
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_promo_ru
     with pytest.allure.step("Assert for endswith URL"):
-        app.session.current_url(endswith="promo")
+        app.session.current_url_end(endswith="promo")
 
 
 @pytest.allure.step("Open about page")
@@ -46,7 +46,7 @@ def test_open_about(app):
     with pytest.allure.step("Assert for name of page"):
         assert app.warning.get_outer_text(app.selectors.page_header_h2) == app.text.header_about_ru
     with pytest.allure.step("Assert for endswith URL"):
-        app.session.current_url(endswith="about")
+        app.session.current_url_end(endswith="about")
 
 
 @pytest.allure.step("Open about page")

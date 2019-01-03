@@ -38,10 +38,7 @@ class AdminHelper:
         self.open_registration_email()
         driver.find_element_by_xpath(self.app.selectors.registration_link).click()
 """
-    def switch_to_user_email(self):
-        driver = self.app.driver
-        window_after = driver.window_handles[1]
-        driver.switch_to_window(window_after)
+
 
     def open_user_registration_email(self):
         driver = self.app.driver
@@ -62,7 +59,7 @@ class AdminHelper:
         driver = self.app.driver
         self.login_as_admin()
         self.open_user_registration_email()
-        self.switch_to_user_email()
+        self.app.pages.switch_to_new_tab()
         driver.find_element_by_xpath(self.app.selectors.registration_link).click()  # Click to registration link
 
     def get_users_id(self):

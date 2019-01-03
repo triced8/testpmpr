@@ -18,6 +18,7 @@ def app(request):
 @pytest.fixture(scope="session")
 def app1(request):
     global fixture
+
     if fixture is None:
         fixture = Application(browser="chrome")
     else:

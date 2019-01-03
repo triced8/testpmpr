@@ -4,9 +4,9 @@ class Selectors:
         self.app = app
 
     #  URL
-    site_ru = "https://beta.pokermatch.com/ru"
-    site_admin = "https://beta.pokermatch.com/sa"
-    forgot_password = "https://beta.pokermatch.com/ru/page/passwordreminder"
+    site_ru = "https://pokermatch.com/ru"
+    site_admin = "https://a.pokermatch.com/sa"
+    forgot_password = "https://pokermatch.com/ru/page/passwordreminder"
 
     # Header menu links
     header_menu_news = "//a[@class='main_menu_element news ']"  # News

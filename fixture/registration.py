@@ -50,7 +50,7 @@ class SignUpHelper:
 
     def error_sign_up(self):
         driver = self.app.driver
-        if driver.current_url.endswith("/later/registration/"):
+        if driver.current_url_end.endswith("/later/registration/"):
             self.app.open_main_page_ru()
             print("Yess!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             # driver.get("https://beta.pokermatch.com/ru#registration")
